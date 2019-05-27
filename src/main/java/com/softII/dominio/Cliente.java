@@ -5,11 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
+
+import com.softII.Util.JPAUtil;
 
 @Entity
 public class Cliente extends Usuario implements Serializable {
@@ -80,5 +83,27 @@ public class Cliente extends Usuario implements Serializable {
 		return null;
 
 	}
+	
+	public boolean registrarCliente() {
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		
+		EntityTransaction tx = em.getTransaction();
+		
+		
+		try {
+			tx.begin();
+			em.persist(this);
+
+			tx.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			em.close();
+
+		}
+		return false;
+	}
+	
 
 }

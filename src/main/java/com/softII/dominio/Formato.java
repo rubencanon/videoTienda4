@@ -1,16 +1,21 @@
 package com.softII.dominio;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.TypedQuery;
+
+import com.softII.Util.JPAUtil;
 
 @Entity
 public class Formato implements Serializable {
@@ -52,6 +57,17 @@ public class Formato implements Serializable {
 		this.nombreFormato = nombreFormato;
 	}
 	
+	public List<Formato> listarFormatos() {
+
+		EntityManager em = JPAUtil.getEntityManager();
+
+		TypedQuery<Formato> result = em.createQuery("SELECT c FROM Formato c", Formato.class);
+
+		List<Formato> resultList = result.getResultList();
+
+		return resultList;
+
+	}
 	
 	
 }

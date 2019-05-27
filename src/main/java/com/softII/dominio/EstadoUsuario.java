@@ -1,8 +1,14 @@
 package com.softII.dominio;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
+import javax.persistence.TypedQuery;
+
+import com.softII.Util.JPAUtil;
 
 @Entity
 public class EstadoUsuario {
@@ -25,6 +31,16 @@ public void setDescripcion(String descripcion) {
 	this.descripcion = descripcion;
 }
 
+public List<EstadoUsuario> listarEstados() {
 
+	EntityManager em = JPAUtil.getEntityManager();
+
+	TypedQuery<EstadoUsuario> result = em.createQuery("SELECT c FROM EstadoUsuario c", EstadoUsuario.class);
+
+	List<EstadoUsuario> resultList = result.getResultList();
+
+	return resultList;
+
+}
 	
 }
