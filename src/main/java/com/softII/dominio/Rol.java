@@ -5,10 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,7 +34,7 @@ public class Rol implements Serializable {
 	@Column(name = "nombre_rol")
 	private String nombreRol;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "rol_privilegio", foreignKey = @ForeignKey(name = "FK_ROL_PRIVILEGIO"), joinColumns = {
 			@JoinColumn(name = "id_rol", foreignKey = @ForeignKey(name = "FK_ROL_PRIVILEGIO")) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_Privilegio", foreignKey = @ForeignKey(name = "FK_PRIVILEGIO_ROL")) })

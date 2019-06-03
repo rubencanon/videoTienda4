@@ -57,32 +57,6 @@ public class Cliente extends Usuario implements Serializable {
 ////////////////////////////////////////////////////////////////////////
 	
 	
-	public Cliente buscarClientePorId(String documentoId) {
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceUnit");
-		EntityManager em = emf.createEntityManager();
-		try {
-/*
-			TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.documentoId = :documentoId",
-					Cliente.class);
-			query.setParameter("documentoId", documentoId);
-
-			List<Cliente> results = query.getResultList();
-
-			if (!results.isEmpty()) {
-				return results.get(0);
-			}
-*/
-		} catch (Exception e) {
-			System.out.print("Error" + e);
-
-		} finally {
-			em.close();
-		}
-
-		return null;
-
-	}
 	
 	public boolean registrarCliente() {
 		

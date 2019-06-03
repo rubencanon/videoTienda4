@@ -49,5 +49,26 @@ TipoTransaccion tipoTran = new TipoTransaccion();
 List<TipoTransaccion> tipos = tipoTran.listarTiposTransaccion();
 		// System.out.println("Nombre Cliente:" + cliente.getNombre1());
 
+usuario.setIdUsuario("RUBEN.CANON");
+usuario = usuario.buscarUsuario();
+
+
+
+Set<Rol> rolesU = usuario.getRoles();
+
+for (Rol rol2 : rolesU) {
+	
+
+	Set<Privilegio> provilegios = rol2.getPrivilegios();
+	
+	for (Privilegio p : provilegios) {
+		System.out.println(p.getNombrePrivilegio());
+
+	}
+	
+	
+}
+
+
 	}
 }
