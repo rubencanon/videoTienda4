@@ -37,12 +37,12 @@ public class ControladorCliente implements ActionListener {
 		// TODO Auto-generated method stub
 		System.out.println("Controlador ejecutado");
 
-		modeloCliente.getPersona().setApellido1(vistaCliente.getTxtApellidos());
-		modeloCliente.getPersona().setNombre1(vistaCliente.getTxtNombres());
-		modeloCliente.getPersona().setDocumentoId(vistaCliente.getTxtCedula());
-		modeloCliente.getPersona().setEmail(vistaCliente.getTxtEmail());
-		modeloCliente.getPersona().setTelefono(vistaCliente.getTxtTelefono());
-		modeloCliente.getPersona().setDireccion(vistaCliente.getTxtDireccion());
+		modeloCliente.setApellido1(vistaCliente.getTxtApellidos());
+		modeloCliente.setNombre1(vistaCliente.getTxtNombres());
+		modeloCliente.setDocumentoId(vistaCliente.getTxtCedula());
+		modeloCliente.setEmail(vistaCliente.getTxtEmail());
+		modeloCliente.setTelefono(vistaCliente.getTxtTelefono());
+		modeloCliente.setDireccion(vistaCliente.getTxtDireccion());
 		modeloCliente.getAfiliacion().setIdAfiliacion(1);
 
 		boolean resultado = modeloCliente.registrarCliente();

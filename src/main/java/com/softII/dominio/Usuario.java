@@ -26,14 +26,11 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-
-public class Usuario implements Serializable {
+public class Usuario extends Persona implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
 	@Column(name = "id_usuario")
 	private String idUsuario;
 	private String clave;

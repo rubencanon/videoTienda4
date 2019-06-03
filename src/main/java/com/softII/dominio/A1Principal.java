@@ -24,6 +24,7 @@ public class A1Principal {
 		EntityManager em = jpa.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
+		/*
 		Cliente cliente = new Cliente();
 		Usuario usuario = new Usuario();
 		Transaccion transaccion = new Transaccion();
@@ -68,7 +69,7 @@ for (Rol rol2 : rolesU) {
 	
 	
 }
-
+*/
 
 	}
 }

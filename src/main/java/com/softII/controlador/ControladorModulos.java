@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import com.softII.dominio.Pedido;
+import com.softII.vista.Compras;
 import com.softII.vista.Modulos;
 
 public class ControladorModulos implements ActionListener {
@@ -31,6 +33,14 @@ public class ControladorModulos implements ActionListener {
 
 		} else if ("COMPRAS".equals(e.getActionCommand())) {
 			System.out.println("COMPRAS");
+			
+			Compras compras = new Compras();
+			
+			Pedido pedido = new Pedido();
+			ControladorCompras controlador = new ControladorCompras(compras, pedido);
+			
+			controlador.iniciarVista();
+			
 
 		} else if ("CLIENTES".equals(e.getActionCommand())) {
 			System.out.println("CLIENTES");
