@@ -39,6 +39,15 @@ public class ControladorVinculacion implements ActionListener {
 			cliente.setDocumentoId(vinculacion.getTxtDocumentoid().getText());
 
 			cliente = cliente.buscarCliente();
+			System.out.println("....");
+			if (cliente != null) {
+				vinculacion.getTxtNombres().setText(cliente.getNombres());
+				vinculacion.getTxtApellidos().setText(cliente.getApellidos());
+				vinculacion.getTxtEstado().setText(cliente.getEstado().getDescripcion());
+
+			}else if("VINCULAR".equals(e.getActionCommand())) {
+				
+			}
 
 		}
 

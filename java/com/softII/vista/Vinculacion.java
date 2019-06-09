@@ -110,6 +110,10 @@ public class Vinculacion extends JFrame {
 		contentPane.add(lblEstado);
 
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 
 		btnBuscar.setActionCommand("BUSCAR");
 

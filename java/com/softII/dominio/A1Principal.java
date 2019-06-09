@@ -1,13 +1,8 @@
 package com.softII.dominio;
 
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
 import com.softII.Util.JPAUtil;
 

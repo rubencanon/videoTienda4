@@ -37,8 +37,8 @@ public class ControladorCliente implements ActionListener {
 		// TODO Auto-generated method stub
 		System.out.println("Controlador ejecutado");
 
-		modeloCliente.setApellido1(vistaCliente.getTxtApellidos());
-		modeloCliente.setNombre1(vistaCliente.getTxtNombres());
+		modeloCliente.setApellidos(vistaCliente.getTxtApellidos());
+		modeloCliente.setNombres(vistaCliente.getTxtNombres());
 		modeloCliente.setDocumentoId(vistaCliente.getTxtCedula());
 		modeloCliente.setEmail(vistaCliente.getTxtEmail());
 		modeloCliente.setTelefono(vistaCliente.getTxtTelefono());

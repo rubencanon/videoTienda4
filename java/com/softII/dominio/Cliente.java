@@ -28,29 +28,20 @@ public class Cliente extends Persona implements Serializable {
 	private EstadoValidez estado;
 
 	@ManyToOne
-	@JoinColumn(name="id_afiliacion", foreignKey = @ForeignKey(name = "FK_CLIENTE_AFILIACION"))
+	@JoinColumn(name = "id_afiliacion", foreignKey = @ForeignKey(name = "FK_CLIENTE_AFILIACION"))
 	private Afiliacion afiliacion;
-/*
-	@OneToOne
-	@JoinColumn(name = "documentoId", foreignKey = @ForeignKey(name = "FK_CLIENTE_PERSONA"))
-	private Persona persona;
 
-
-	
-	public Persona getPersona() {
-		return persona;
+	public EstadoValidez getEstado() {
+		return estado;
 	}
 
-
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public void setEstado(EstadoValidez estado) {
+		this.estado = estado;
 	}
-*/	
 
 	public Afiliacion getAfiliacion() {
 		return afiliacion;
 	}
-
 
 	public void setAfiliacion(Afiliacion afiliacion) {
 		this.afiliacion = afiliacion;
@@ -59,48 +50,29 @@ public class Cliente extends Persona implements Serializable {
 	//////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-public Cliente buscarCliente() {
-	EntityManager em = JPAUtil.getEntityManager();
+	public Cliente buscarCliente() {
+		EntityManager em = JPAUtil.getEntityManager();
 
-	Cliente cliente = null;
-	
-	String query = "SELECT e FROM Persona e where e.documentoId = :documentoId";
-	TypedQuery<Persona> result = em.createQuery(query, Persona.class);
-	result.setParameter("documentoId", this.getDocumentoId());
-	List<Persona> resultList = result.getResultList();
+		Cliente cliente = null;
 
-	if (!resultList.isEmpty()) {
-		Persona persona = resultList.get(0);
-		
-		query = "SELECT e FROM Cliente e where e.documentoId = :documentoId";
+		String query = "SELECT e FROM Cliente e where e.documentoId = :documentoId";
+		TypedQuery<Cliente> result = em.createQuery(query, Cliente.class);
+		result.setParameter("documentoId", this.getDocumentoId());
+		List<Cliente> resultList = result.getResultList();
 
-		TypedQuery<Cliente> result2 = em.createQuery(query, Cliente.class);
-		result2.setParameter("documentoId", persona.getDocumentoId());
-
-		List<Cliente> resultList2 = result2.getResultList();
-		
-		
-		if (!resultList2.isEmpty()) {
-			cliente = resultList2.get(0);
+		if (!resultList.isEmpty()) {
+			cliente = resultList.get(0);
 		}
 		
+		return cliente;
 	}
-	
-	
 
-
-	return cliente;
-}
-
-	
-	
 	public boolean registrarCliente() {
-		
+
 		EntityManager em = JPAUtil.getEntityManager();
-		
+
 		EntityTransaction tx = em.getTransaction();
-		
-		
+
 		try {
 			tx.begin();
 			em.persist(this);
@@ -114,6 +86,5 @@ public Cliente buscarCliente() {
 		}
 		return false;
 	}
-	
 
 }
