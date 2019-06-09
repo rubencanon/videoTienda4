@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import com.softII.Util.JPAUtil;
 
 @Entity
-public class EstadoUsuario {
+public class EstadoValidez {
 @Id
 @Column(name="id_estado_usuario")
 private Integer idEstadoUsuario;
@@ -31,13 +31,13 @@ public void setDescripcion(String descripcion) {
 	this.descripcion = descripcion;
 }
 
-public List<EstadoUsuario> listarEstados() {
+public List<EstadoValidez> listarEstados() {
 
 	EntityManager em = JPAUtil.getEntityManager();
 
-	TypedQuery<EstadoUsuario> result = em.createQuery("SELECT c FROM EstadoUsuario c", EstadoUsuario.class);
+	TypedQuery<EstadoValidez> result = em.createQuery("SELECT c FROM EstadoUsuario c", EstadoValidez.class);
 
-	List<EstadoUsuario> resultList = result.getResultList();
+	List<EstadoValidez> resultList = result.getResultList();
 
 	return resultList;
 

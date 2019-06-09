@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import com.softII.Util.Item;
 import com.softII.dominio.Afiliacion;
 import com.softII.dominio.Cliente;
-import com.softII.dominio.EstadoUsuario;
+import com.softII.dominio.EstadoValidez;
 import com.softII.vista.GestionClientes;
 
 public class ControladorCliente implements ActionListener {
@@ -65,13 +65,13 @@ public class ControladorCliente implements ActionListener {
 
 	}
 	public void llenarEstados() {
-		EstadoUsuario estadoUsuario = new EstadoUsuario();
+		EstadoValidez estadoValidez = new EstadoValidez();
 
 		Vector model = new Vector();
 
-		List<EstadoUsuario> estados = estadoUsuario.listarEstados();
+		List<EstadoValidez> estados = estadoValidez.listarEstados();
 
-		for (EstadoUsuario estado : estados) {
+		for (EstadoValidez estado : estados) {
 			model.addElement(new Item(estado.getIdEstadoUsuario(), estado.getDescripcion()));
 		}
 

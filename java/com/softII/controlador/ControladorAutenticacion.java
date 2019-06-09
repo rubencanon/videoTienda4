@@ -40,7 +40,7 @@ public class ControladorAutenticacion implements ActionListener {
 		System.out.println(idUsuario);
 
 		usuario = new Usuario();
-		usuario.setIdUsuario(idUsuario);
+		usuario.setDocumentoId(idUsuario);
 		usuario = usuario.buscarUsuario();
 
 		if (usuario != null) {
