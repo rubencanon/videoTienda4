@@ -7,12 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 
 import com.softII.Util.JPAUtil;
 
 @Entity
-
+@Table(name="Tipo_Transaccion")
 public class TipoTransaccion implements Serializable {
 	/**
 	 * 

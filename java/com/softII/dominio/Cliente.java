@@ -23,7 +23,9 @@ public class Cliente extends Persona implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
+	@OneToOne
+	@JoinColumn(name = "estado", foreignKey = @ForeignKey(name = "FK_CLIENTE_ESTADO"))
+	private EstadoValidez estado;
 
 	@ManyToOne
 	@JoinColumn(name="id_afiliacion", foreignKey = @ForeignKey(name = "FK_CLIENTE_AFILIACION"))
