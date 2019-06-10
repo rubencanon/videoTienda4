@@ -1,17 +1,22 @@
 package com.softII.dominio;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.TypedQuery;
+
+import com.softII.Util.JPAUtil;
 
 @Entity
 public class Articulo implements Serializable {
@@ -46,8 +51,6 @@ public class Articulo implements Serializable {
 	@JoinColumn(name = "id_estado", foreignKey = @ForeignKey(name = "FK_ARTICULO_ESTADO"))
 	private EstadoArticulo estado;
 
-	
-	
 	public TipoTransaccion getTipoTransaccion() {
 		return tipoTransaccion;
 	}
@@ -88,7 +91,6 @@ public class Articulo implements Serializable {
 		this.formato = formato;
 	}
 
-
 	public Set<Categoria> getCategorias() {
 		return categorias;
 	}
@@ -111,6 +113,28 @@ public class Articulo implements Serializable {
 
 	public void setAutor(String autor) {
 		this.autor = autor;
+	}
+
+///////////////////////////////////////////////////////////////////////
+	public Articulo buscarArticulo() {
+		EntityManager em = JPAUtil.getEntityManager();
+
+		Articulo articulo = null;
+
+		try {
+			String query = "SELECT e FROM Articulo e where e.referencia = :referencia";
+			TypedQuery<Articulo> result = em.createQuery(query, Articulo.class);
+			result.setParameter("referencia", this.getReferencia());
+			List<Articulo> resultList = result.getResultList();
+
+			if (!resultList.isEmpty()) {
+				articulo = resultList.get(0);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return articulo;
 	}
 
 }

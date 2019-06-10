@@ -25,13 +25,13 @@ public class Principal {
 		controlador.iniciarVista();
 		
 */		
-		Pedido pedido = new Pedido();
+		Pedido modeloPedido = new Pedido();
 
-		Compras compras = new Compras();
+		Compras vistaCompras = new Compras();
 
-		ControladorCompras controlador = new ControladorCompras(compras, pedido);
+		ControladorCompras controlador = new ControladorCompras(vistaCompras, modeloPedido);
 
-		compras.setControlador(controlador);
+		vistaCompras.setControlador(controlador);
 
 		controlador.iniciarVista();	
 		

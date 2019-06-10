@@ -3,29 +3,49 @@ package com.softII.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import com.softII.dominio.Cliente;
-import com.softII.dominio.Pedido;
-import com.softII.vista.Compras;
-import com.softII.vista.Vinculacion;
+import com.softII.vista.VinculacionCliente;
 
 public class ControladorVinculacion implements ActionListener {
 
-	Vinculacion vinculacion;
-	Cliente cliente;
+	VinculacionCliente vistaVinculacion;
+	Cliente modeloCliente;
+	
+	
 
-	public ControladorVinculacion(Vinculacion vinculacion, Cliente cliente) {
+	public VinculacionCliente getVinculacion() {
+		return vistaVinculacion;
+	}
+
+	public void setVinculacion(VinculacionCliente vinculacion) {
+		this.vistaVinculacion = vinculacion;
+	}
+
+	public Cliente getCliente() {
+		return modeloCliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.modeloCliente = cliente;
+	}
+
+	public ControladorVinculacion(VinculacionCliente vinculacion, Cliente cliente) {
 		super();
-		this.vinculacion = vinculacion;
-		this.cliente = cliente;
+		this.vistaVinculacion = vinculacion;
+		this.modeloCliente = cliente;
 	}
 
 	public void iniciarVista() {
-		vinculacion.setTitle("Video Tienda");
-		vinculacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		vinculacion.setLocationRelativeTo(null);
-		vinculacion.setVisible(true);
+		vistaVinculacion.setTitle("Video Tienda");
+		vistaVinculacion.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		vistaVinculacion.setLocationRelativeTo(null);
+		vistaVinculacion.setVisible(true);
+		
+		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -36,20 +56,34 @@ public class ControladorVinculacion implements ActionListener {
 
 			System.out.println(e.getActionCommand());
 
-			cliente.setDocumentoId(vinculacion.getTxtDocumentoid().getText());
+			modeloCliente.setDocumentoId(vistaVinculacion.getTxtDocumentoid().getText());
 
-			cliente = cliente.buscarCliente();
+			modeloCliente = modeloCliente.buscarCliente();
 			System.out.println("....");
-			if (cliente != null) {
-				vinculacion.getTxtNombres().setText(cliente.getNombres());
-				vinculacion.getTxtApellidos().setText(cliente.getApellidos());
-				vinculacion.getTxtEstado().setText(cliente.getEstado().getDescripcion());
-
-			}else if("VINCULAR".equals(e.getActionCommand())) {
+			if (modeloCliente != null) {
+				vistaVinculacion.getTxtNombres().setText(modeloCliente.getNombres());
+				vistaVinculacion.getTxtApellidos().setText(modeloCliente.getApellidos());
+				vistaVinculacion.getTxtEstado().setText(modeloCliente.getEstado().getDescripcion());
+				vistaVinculacion.getTxtEmail().setText(modeloCliente.getEmail());
+				vistaVinculacion.getTxtDireccion().setText(modeloCliente.getDireccion());
+				vistaVinculacion.getTxtAfiliacion().setText(modeloCliente.getAfiliacion().getNombreAfiliacion());
 				
-			}
+				
+				
 
+			} 
+
+		}else if ("VINCULAR".equals(e.getActionCommand())) {
+			
+			vistaVinculacion.dispose();
+			
+			
+			
+
+		}else if ("CANCELAR".equals(e.getActionCommand())) {
+			vistaVinculacion.dispose();
 		}
+		
 
 	}
 

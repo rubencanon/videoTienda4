@@ -55,15 +55,19 @@ public class Cliente extends Persona implements Serializable {
 
 		Cliente cliente = null;
 
-		String query = "SELECT e FROM Cliente e where e.documentoId = :documentoId";
-		TypedQuery<Cliente> result = em.createQuery(query, Cliente.class);
-		result.setParameter("documentoId", this.getDocumentoId());
-		List<Cliente> resultList = result.getResultList();
+		try {
+			String query = "SELECT e FROM Cliente e where e.documentoId = :documentoId";
+			TypedQuery<Cliente> result = em.createQuery(query, Cliente.class);
+			result.setParameter("documentoId", this.getDocumentoId());
+			List<Cliente> resultList = result.getResultList();
 
-		if (!resultList.isEmpty()) {
-			cliente = resultList.get(0);
+			if (!resultList.isEmpty()) {
+				cliente = resultList.get(0);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		
+
 		return cliente;
 	}
 
