@@ -2,6 +2,7 @@ package com.softII.vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,6 +26,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JSeparator;
 import java.awt.Panel;
+import javax.swing.BoxLayout;
+import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Compras extends JFrame {
 
@@ -36,8 +41,6 @@ public class Compras extends JFrame {
 	private JTable listaArticulos;
 	private Panel panelTabla;
 	private JButton btnAgregarArticulo;
-	
-	
 
 	public JTable getListaArticulos() {
 		return listaArticulos;
@@ -70,8 +73,6 @@ public class Compras extends JFrame {
 	public void setTxtApellidos(JTextField txtApellidos) {
 		this.txtApellidos = txtApellidos;
 	}
-
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -126,7 +127,6 @@ public class Compras extends JFrame {
 
 		btnVincularCliente = new JButton("Vincular Cliente");
 
-
 		btnVincularCliente.setActionCommand("VINCULAR");
 
 		btnVincularCliente.setBounds(304, 7, 153, 23);
@@ -137,81 +137,53 @@ public class Compras extends JFrame {
 
 		btnAgregarArticulo.setBounds(10, 131, 134, 23);
 		contentPane.add(btnAgregarArticulo);
-		
 
-		
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 98, 537, 2);
 		contentPane.add(separator);
 
-		List<Articulo> listaArticulos2 = new ArrayList<Articulo>(); 
+		List<Articulo> listaArticulos2 = new ArrayList<Articulo>();
 
+		DefaultTableModel model = new DefaultTableModel();
+		listaArticulos = new JTable(model);
+		listaArticulos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Se ha ejecutado un click");
+			}
+		});
+		listaArticulos.setSurrendersFocusOnKeystroke(true);
+		listaArticulos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listaArticulos.setCellSelectionEnabled(true);
+		listaArticulos.setFont(new Font("Tahoma", Font.BOLD, 11));
 
+		Object[] columnas = { "Referencia", "Titulo", "Formato", "Transacción", "Precio", "Accion" };
 
-		
-		DefaultTableModel model = new DefaultTableModel(); 
-		listaArticulos = new JTable(model); 
-		
-		Object[] columnas = {"Referencia", "Titulo", "Formato", "Transacción", "Precio", "Accion"};		
-		
-	    String data[][]={ {"101","Amit","670000"},    
-                {"102","Jai","780000"},    
-                {"101","Sachin","700000"}}; 
-		
-	    
-	    
-	    
 		for (Object object : columnas) {
-		
-			model.addColumn(object); 
 
-		}
-		
-	    
-		for (Articulo  articulo: listaArticulos2) {
-			Object[] filaArticulo = new Object[5];
-			  filaArticulo[0] = articulo.getTitulo();
-			  filaArticulo[1] = articulo.getReferencia();
-			  filaArticulo[2] = articulo.getFormato();
-			  filaArticulo[3] = articulo.getTipoTransaccion().getDescripcion();
-			  filaArticulo[4] = articulo.getPrecio();
-			  filaArticulo[5] = new JButton();
-
-			  model.addRow(filaArticulo);
+			model.addColumn(object);
 
 		}
 
-		
-		
-		
-		
-		
 		model.addRow(columnas);
-		Object[] columnas2 = {"Referencia", "Titulo", "Formato", "Transacción", "Precio"};		
-
-		model.addRow(columnas2);
-
-		
-		
+	    listaArticulos.getTableHeader().setFont(new Font("SansSerif", 1, 18));
 		panelTabla = new Panel();
-		panelTabla.setBounds(10, 348, 516, 103);
+		panelTabla.setFont(new Font("Arial", Font.BOLD, 14));
+		panelTabla.setBounds(10, 176, 516, 103);
 		contentPane.add(panelTabla);
-		panelTabla.add(listaArticulos, BorderLayout.CENTER);
-		
+		panelTabla.setLayout(new BoxLayout(panelTabla, BoxLayout.X_AXIS));
+		panelTabla.add(listaArticulos);
 
-	
-
-		
-		
 	}
-	
+
 	public void agregarFila(Articulo articulo) {
-		Object[] filaArticulo =  {articulo.getReferencia(), articulo.getTitulo(),articulo.getFormato().getNombreFormato(), articulo.getTipoTransaccion().getDescripcion(),articulo.getPrecio()  };
-	
-		  DefaultTableModel model = (DefaultTableModel) listaArticulos.getModel();
-		  
-		  model.addRow(filaArticulo);
+		Object[] filaArticulo = { articulo.getReferencia(), articulo.getTitulo(),
+				articulo.getFormato().getNombreFormato(), articulo.getTipoTransaccion().getDescripcion(),
+				articulo.getPrecio() };
+
+		DefaultTableModel model = (DefaultTableModel) listaArticulos.getModel();
+
+		model.addRow(filaArticulo);
 	}
 
 	public void setControlador(ControladorCompras controlador) {
