@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+import com.softII.dominio.Articulo;
 import com.softII.dominio.Pedido;
 import com.softII.dominio.Usuario;
 import com.softII.vista.Compras;
+import com.softII.vista.GestionArticulos;
 import com.softII.vista.Modulos;
 
 public class ControladorModulos implements ActionListener {
@@ -35,14 +37,23 @@ public class ControladorModulos implements ActionListener {
 		if ("ARTICULOS".equals(e.getActionCommand())) {
 			System.out.println("ARTICULOS");
 
+			Articulo modeloArticulo = new Articulo();
+			GestionArticulos vistaGestArticulos = new GestionArticulos();
+			ControladorGestionArticulos controlador = new ControladorGestionArticulos(vistaGestArticulos,
+					modeloArticulo);
+
+			vistaGestArticulos.setControlador(controlador);
+			modulos.hide();
+			controlador.iniciarVista();
+
 		} else if ("COMPRAS".equals(e.getActionCommand())) {
 			System.out.println("COMPRAS");
 
 			Compras vistaCompras = new Compras();
 
-			Pedido pedido = new Pedido();
-			pedido.setEmpleado(usuario);
-			ControladorCompras controlador = new ControladorCompras(vistaCompras, pedido);
+			Pedido modeloPedido = new Pedido();
+			modeloPedido.setEmpleado(usuario);
+			ControladorCompras controlador = new ControladorCompras(vistaCompras, modeloPedido);
 			vistaCompras.setControlador(controlador);
 			modulos.hide();
 			controlador.iniciarVista();

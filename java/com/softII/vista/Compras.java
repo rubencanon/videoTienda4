@@ -16,6 +16,7 @@ import com.softII.dominio.Articulo;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -33,7 +34,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Compras extends JFrame {
+public class Compras extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtDocumentoId;

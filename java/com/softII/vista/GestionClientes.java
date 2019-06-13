@@ -13,9 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 
-public class GestionClientes extends JFrame {
+public class GestionClientes extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtCedula;
@@ -27,7 +28,7 @@ public class GestionClientes extends JFrame {
 	private JButton btnBuscar;
 	private JButton btnAgregarCliente;
 	private JComboBox cbEstado;
-	JComboBox cbAfiliacion;
+	private JComboBox cbAfiliacion;
 	
 	public void mostrarMensaje(String mensaje) {
 		this.setVisible(true);
@@ -107,7 +108,8 @@ public class GestionClientes extends JFrame {
 	 * Create the frame.
 	 */
 	public GestionClientes() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		super((java.awt.Frame) null, true);
+		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 659, 429);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
