@@ -33,9 +33,6 @@ public class Transaccion implements Serializable {
 	
 	private Articulo articulo;
 
-	@ManyToOne
-	@JoinColumn(name="id_pedido", foreignKey = @ForeignKey(name="FK_TRANSACCION_PEDIDO"))
-	private Pedido pedido;
 
 	private Long valor;
 	
@@ -67,13 +64,6 @@ public class Transaccion implements Serializable {
 		this.articulo = articulo;
 	}
 
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
 
 	public Long getValor() {
 		return valor;

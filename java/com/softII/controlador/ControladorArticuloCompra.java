@@ -21,6 +21,7 @@ public class ControladorArticuloCompra implements ActionListener {
 
 	public void iniciarVista() {
 		vistaArticulo.setTitle("Video Tienda");
+
 		vistaArticulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		vistaArticulo.setLocationRelativeTo(null);
 		vistaArticulo.setVisible(true);
@@ -52,15 +53,19 @@ public class ControladorArticuloCompra implements ActionListener {
 			modeloArticulo.setReferencia(vistaArticulo.getTxtReferencia().getText());
 			modeloArticulo = modeloArticulo.buscarArticulo();
 
-			vistaArticulo.getTxtReferencia().setText(modeloArticulo.getReferencia());
-			vistaArticulo.getTxtTitulo().setText(modeloArticulo.getTitulo());
-			vistaArticulo.getTxtAutor().setText(modeloArticulo.getAutor());
-			// vistaArticulo.getTxtCategoria().setText(articulo.getCategorias().get);
-			vistaArticulo.getTxtEstado().setText(modeloArticulo.getEstado().getDescripcion());
-			vistaArticulo.getTxtFormato().setText(modeloArticulo.getFormato().getNombreFormato());
-			vistaArticulo.getTxtPrecio().setText(modeloArticulo.getPrecio().toString());
+			if (modeloArticulo != null) {
+				vistaArticulo.getTxtReferencia().setText(modeloArticulo.getReferencia());
+				vistaArticulo.getTxtTitulo().setText(modeloArticulo.getTitulo());
+				vistaArticulo.getTxtAutor().setText(modeloArticulo.getAutor());
+				// vistaArticulo.getTxtCategoria().setText(articulo.getCategorias().get);
+				vistaArticulo.getTxtEstado().setText(modeloArticulo.getEstado().getDescripcion());
+				vistaArticulo.getTxtFormato().setText(modeloArticulo.getFormato().getNombreFormato());
+				vistaArticulo.getTxtPrecio().setText(modeloArticulo.getPrecio().toString());
 
-			vistaArticulo.getTxtTipotransaccion().setText(modeloArticulo.getTipoTransaccion().getDescripcion());
+				vistaArticulo.getTxtTipotransaccion().setText(modeloArticulo.getTipoTransaccion().getDescripcion());
+			} else {
+				vistaArticulo.mostrarMensaje("No existe un articulo con esta referencia");
+			}
 
 			System.out.println(modeloArticulo.getAutor());
 

@@ -131,7 +131,7 @@ public class Articulo implements Serializable {
 				articulo = resultList.get(0);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("ERROR DE CONSULTA EN LA TABLA ARTICULO" + e.getMessage());
 		}
 
 		return articulo;

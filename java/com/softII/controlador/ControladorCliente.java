@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import com.softII.Util.Item;
@@ -26,10 +27,10 @@ public class ControladorCliente implements ActionListener {
 
 	public void iniciarVista() {
 		vistaCliente.setTitle("Gestión de Clientes");
-		vistaCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		vistaCliente.setLocationRelativeTo(null);
 		llenarAfiliaciones();
 		llenarEstados();
+		vistaCliente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		vistaCliente.setLocationRelativeTo(null);
 		vistaCliente.setVisible(true);
 	}
 

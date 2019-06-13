@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -28,7 +29,11 @@ public class ArticulosCompra extends JDialog {
 	private JButton btnAgregar;
 	private JButton btnBuscar;
 	
-	
+	public void mostrarMensaje(String mensaje) {
+		this.setVisible(true);
+		JOptionPane.showMessageDialog(this, mensaje);
+
+	}
 	
 	public JTextField getTxtReferencia() {
 		return txtReferencia;
@@ -120,7 +125,7 @@ public class ArticulosCompra extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		JLabel lblReferencia = new JLabel("Referencia");
-		lblReferencia.setBounds(9, 13, 80, 14);
+		lblReferencia.setBounds(9, 13, 109, 14);
 		contentPanel.add(lblReferencia);
 		
 		txtReferencia = new JTextField();
@@ -171,23 +176,23 @@ public class ArticulosCompra extends JDialog {
 		txtTipotransaccion.setColumns(10);
 		
 		JLabel lblTitulo = new JLabel("Título");
-		lblTitulo.setBounds(9, 38, 80, 14);
+		lblTitulo.setBounds(9, 38, 109, 14);
 		contentPanel.add(lblTitulo);
 		
 		JLabel lblAutor = new JLabel("Autor");
-		lblAutor.setBounds(9, 69, 80, 14);
+		lblAutor.setBounds(9, 69, 109, 14);
 		contentPanel.add(lblAutor);
 		
 		JLabel lblFormato = new JLabel("Formato");
-		lblFormato.setBounds(9, 100, 80, 14);
+		lblFormato.setBounds(9, 100, 109, 14);
 		contentPanel.add(lblFormato);
 		
 		JLabel lblCategoria = new JLabel("Categoría");
-		lblCategoria.setBounds(9, 128, 80, 14);
+		lblCategoria.setBounds(9, 128, 109, 14);
 		contentPanel.add(lblCategoria);
 		
 		JLabel lblPrecio = new JLabel("Precio");
-		lblPrecio.setBounds(9, 167, 80, 14);
+		lblPrecio.setBounds(9, 167, 109, 14);
 		contentPanel.add(lblPrecio);
 		
 		JLabel lblTipoTransaccion = new JLabel("Tipo Transacción");

@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import com.softII.controlador.ControladorVinculacion;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -48,7 +49,11 @@ public class VinculacionCliente extends JDialog {
 		}
 	}
 	
+	public void mostrarMensaje(String mensaje) {
+		this.setVisible(true);
+		JOptionPane.showMessageDialog(this, mensaje);
 
+	}
 	
 	public JFrame getVentanaPadre() {
 		return ventanaPadre;

@@ -13,8 +13,12 @@ public class ControladorVinculacion implements ActionListener {
 
 	VinculacionCliente vistaVinculacion;
 	Cliente modeloCliente;
-	
-	
+
+	public ControladorVinculacion(VinculacionCliente vistaVinculacion, Cliente modeloCliente) {
+		super();
+		this.vistaVinculacion = vistaVinculacion;
+		this.modeloCliente = modeloCliente;
+	}
 
 	public VinculacionCliente getVinculacion() {
 		return vistaVinculacion;
@@ -32,19 +36,11 @@ public class ControladorVinculacion implements ActionListener {
 		this.modeloCliente = cliente;
 	}
 
-	public ControladorVinculacion(VinculacionCliente vinculacion, Cliente cliente) {
-		super();
-		this.vistaVinculacion = vinculacion;
-		this.modeloCliente = cliente;
-	}
-
 	public void iniciarVista() {
 		vistaVinculacion.setTitle("Video Tienda");
 		vistaVinculacion.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		vistaVinculacion.setLocationRelativeTo(null);
 		vistaVinculacion.setVisible(true);
-		
-		
 
 	}
 
@@ -67,23 +63,18 @@ public class ControladorVinculacion implements ActionListener {
 				vistaVinculacion.getTxtEmail().setText(modeloCliente.getEmail());
 				vistaVinculacion.getTxtDireccion().setText(modeloCliente.getDireccion());
 				vistaVinculacion.getTxtAfiliacion().setText(modeloCliente.getAfiliacion().getNombreAfiliacion());
-				
-				
-				
 
-			} 
+			} else {
+				vistaVinculacion.mostrarMensaje("El cliente ingresado no esta registrado en el sistema");
+			}
 
-		}else if ("VINCULAR".equals(e.getActionCommand())) {
-			
+		} else if ("VINCULAR".equals(e.getActionCommand())) {
+
 			vistaVinculacion.dispose();
-			
-			
-			
 
-		}else if ("CANCELAR".equals(e.getActionCommand())) {
+		} else if ("CANCELAR".equals(e.getActionCommand())) {
 			vistaVinculacion.dispose();
 		}
-		
 
 	}
 

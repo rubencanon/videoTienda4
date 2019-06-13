@@ -24,9 +24,9 @@ public class Autenticacion extends JFrame {
 	JButton btnAutenticarse;
 
 	
-	public void mostrarMensaje(String Mensaje) {
+	public void mostrarMensaje(String mensaje) {
 		this.setVisible(true);
-		JOptionPane.showMessageDialog(this, "Credenciales invalidas Intente de nuevo");
+		JOptionPane.showMessageDialog(this, mensaje);
 
 	}
 	
@@ -67,7 +67,7 @@ public class Autenticacion extends JFrame {
 		contentPane.add(lblClave);
 
 		txtUsuario = new JTextField();
-		txtUsuario.setText("RUBEN.CANON");
+		txtUsuario.setText("81754742");
 		txtUsuario.setBounds(153, 65, 124, 20);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
@@ -79,6 +79,7 @@ public class Autenticacion extends JFrame {
 		txtClave.setColumns(10);
 
 		btnAutenticarse = new JButton("Autenticarse");
+		btnAutenticarse.disable();
 
 		btnAutenticarse.setBounds(142, 170, 157, 23);
 		contentPane.add(btnAutenticarse);

@@ -4,17 +4,24 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import com.softII.dominio.Articulo;
 import com.softII.dominio.Cliente;
+import com.softII.dominio.Pago;
 import com.softII.dominio.Pedido;
+import com.softII.dominio.Transaccion;
+import com.softII.dominio.Usuario;
 import com.softII.vista.ArticulosCompra;
 import com.softII.vista.Compras;
 import com.softII.vista.Modulos;
@@ -33,9 +40,10 @@ public class ControladorCompras implements ActionListener {
 
 	public void iniciarVista() {
 		vistaCompras.setTitle("Compras y Alquiler");
-		vistaCompras.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		vistaCompras.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
 		vistaCompras.setLocationRelativeTo(null);
 		vistaCompras.setVisible(true);
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -78,14 +86,30 @@ public class ControladorCompras implements ActionListener {
 
 			Articulo articulo = controlador.getModeloArticulo();
 
+			Transaccion transaccion = new Transaccion();
+			transaccion.setArticulo(articulo);
+			transaccion.setFechaTransaccion(new Date());
+			transaccion.setTipoTransaccion(articulo.getTipoTransaccion());
+			transaccion.setValor(articulo.getPrecio());
+
+			modeloPedido.getTransacciones().add(transaccion);
+
+			vistaCompras.getTxtPagoTotal().setText(modeloPedido.calcularTotal().toString().toString());
+
 			vistaCompras.agregarFila(articulo);
-			
+		} else if ("PAGAR".equals(e.getActionCommand())) {
+			vistaCompras.mostrarMensaje(modeloPedido.calcularTotal().toString());
 
+			Pago pago = new Pago();
+			pago.setTipoPago("EFECTIVO");
+			pago.setValor(modeloPedido.calcularTotal().doubleValue());
 
+			modeloPedido.setPago(pago);
+			modeloPedido.setFechaPedido(new Date());
 
+			modeloPedido.insertarPedido();
 
 		}
 
 	}
-
 }

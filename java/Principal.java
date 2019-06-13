@@ -13,7 +13,9 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-/*
+		
+		
+
 		Usuario usuario = new Usuario();
 
 		Autenticacion autenticacion = new Autenticacion();
@@ -24,7 +26,9 @@ public class Principal {
 
 		controlador.iniciarVista();
 		
-*/		
+		
+		
+		/*
 		Pedido modeloPedido = new Pedido();
 
 		Compras vistaCompras = new Compras();
@@ -34,7 +38,7 @@ public class Principal {
 		vistaCompras.setControlador(controlador);
 
 		controlador.iniciarVista();	
-		
+		*/
 	}
 
 }

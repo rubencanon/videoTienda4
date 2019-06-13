@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,6 +43,30 @@ public class Compras extends JFrame {
 	private JTable listaArticulos;
 	private Panel panelTabla;
 	private JButton btnAgregarArticulo;
+	private JLabel lblPagoTotalDel;
+	private JTextField txtPagoTotal;
+	private JButton btnPagar;
+	private JButton btnCancelar;
+
+	public void mostrarMensaje(String mensaje) {
+		this.setVisible(true);
+		JOptionPane.showMessageDialog(this, mensaje);
+
+	}
+
+	
+	
+	public JTextField getTxtPagoTotal() {
+		return txtPagoTotal;
+	}
+
+
+
+	public void setTxtPagoTotal(JTextField txtPagoTotal) {
+		this.txtPagoTotal = txtPagoTotal;
+	}
+
+
 
 	public JTable getListaArticulos() {
 		return listaArticulos;
@@ -126,7 +152,6 @@ public class Compras extends JFrame {
 		txtApellidos.setColumns(10);
 
 		btnVincularCliente = new JButton("Vincular Cliente");
-
 		btnVincularCliente.setActionCommand("VINCULAR");
 
 		btnVincularCliente.setBounds(304, 7, 153, 23);
@@ -166,13 +191,35 @@ public class Compras extends JFrame {
 		}
 
 		model.addRow(columnas);
-	    listaArticulos.getTableHeader().setFont(new Font("SansSerif", 1, 18));
+		listaArticulos.getTableHeader().setFont(new Font("SansSerif", 1, 18));
 		panelTabla = new Panel();
 		panelTabla.setFont(new Font("Arial", Font.BOLD, 14));
 		panelTabla.setBounds(10, 176, 516, 103);
 		contentPane.add(panelTabla);
 		panelTabla.setLayout(new BoxLayout(panelTabla, BoxLayout.X_AXIS));
 		panelTabla.add(listaArticulos);
+
+		lblPagoTotalDel = new JLabel("Total a Pagar:");
+		lblPagoTotalDel.setBounds(10, 382, 114, 14);
+		contentPane.add(lblPagoTotalDel);
+
+		txtPagoTotal = new JTextField();
+		txtPagoTotal.setEditable(false);
+		txtPagoTotal.setBounds(147, 379, 86, 20);
+		contentPane.add(txtPagoTotal);
+		txtPagoTotal.setColumns(10);
+
+		btnPagar = new JButton("Pagar");
+		btnPagar.setActionCommand("PAGAR");
+
+		btnPagar.setBounds(10, 421, 89, 23);
+		contentPane.add(btnPagar);
+
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setActionCommand("CANCELAR");
+
+		btnCancelar.setBounds(144, 421, 89, 23);
+		contentPane.add(btnCancelar);
 
 	}
 
@@ -189,5 +236,7 @@ public class Compras extends JFrame {
 	public void setControlador(ControladorCompras controlador) {
 		btnVincularCliente.addActionListener(controlador);
 		btnAgregarArticulo.addActionListener(controlador);
+		btnPagar.addActionListener(controlador);
+		btnCancelar.addActionListener(controlador);
 	}
 }

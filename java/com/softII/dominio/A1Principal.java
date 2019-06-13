@@ -20,6 +20,16 @@ public class A1Principal {
 		EntityTransaction tx = em.getTransaction();
 
 		/*
+		Usuario user = new Usuario();
+		
+		user.setDocumentoId("81754742");
+		user = user.buscarUsuario();
+		
+		
+		user.getApellidos();
+		
+		/*
+		/*
 		Cliente cliente = new Cliente();
 		Usuario usuario = new Usuario();
 		Transaccion transaccion = new Transaccion();

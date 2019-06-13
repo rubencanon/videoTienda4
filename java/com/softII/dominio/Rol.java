@@ -1,6 +1,7 @@
 package com.softII.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class Rol implements Serializable {
 			@JoinColumn(name = "id_rol", foreignKey = @ForeignKey(name = "FK_ROL_PRIVILEGIO")) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_Privilegio", foreignKey = @ForeignKey(name = "FK_PRIVILEGIO_ROL")) })
 
-	private Set<Privilegio> privilegios;
+	private List<Privilegio> privilegios;
 
 	public Integer getIdRol() {
 		return idRol;
@@ -49,17 +50,19 @@ public class Rol implements Serializable {
 		this.idRol = idRol;
 	}
 
-	public Set<Privilegio> getPrivilegios() {
+
+
+	public List<Privilegio> getPrivilegios() {
 		return privilegios;
 	}
 
-	public void setPrivilegios(Set<Privilegio> privilegios) {
+	public void setPrivilegios(List<Privilegio> privilegios) {
 		this.privilegios = privilegios;
 	}
 
 	public Rol() {
 		super();
-		privilegios = new HashSet<Privilegio>();
+		privilegios = new ArrayList<Privilegio>();
 	}
 
 	public String getNombreRol() {

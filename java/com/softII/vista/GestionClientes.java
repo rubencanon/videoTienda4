@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import com.softII.controlador.ControladorCliente;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -28,7 +29,11 @@ public class GestionClientes extends JFrame {
 	private JComboBox cbEstado;
 	JComboBox cbAfiliacion;
 	
-	
+	public void mostrarMensaje(String mensaje) {
+		this.setVisible(true);
+		JOptionPane.showMessageDialog(this, mensaje);
+
+	}
 	
 	public JComboBox getCbAfiliacion() {
 		return cbAfiliacion;
