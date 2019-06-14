@@ -20,6 +20,27 @@ public class ControladorVinculacion implements ActionListener {
 		this.modeloCliente = modeloCliente;
 	}
 
+	
+	public VinculacionCliente getVistaVinculacion() {
+		return vistaVinculacion;
+	}
+
+
+	public void setVistaVinculacion(VinculacionCliente vistaVinculacion) {
+		this.vistaVinculacion = vistaVinculacion;
+	}
+
+
+	public Cliente getModeloCliente() {
+		return modeloCliente;
+	}
+
+
+	public void setModeloCliente(Cliente modeloCliente) {
+		this.modeloCliente = modeloCliente;
+	}
+
+
 	public VinculacionCliente getVinculacion() {
 		return vistaVinculacion;
 	}

@@ -61,16 +61,16 @@ public class ControladorAutenticacion implements ActionListener {
 				for (Privilegio privilegio : privilegios) {
 					if ("GESTIONAR CLIENTES".equals(privilegio.getNombrePrivilegio())) {
 
-						vistaModulos.getBtnGestinClientes().enable();
+						vistaModulos.getBtnGestinClientes().setEnabled(true);
 					}
 
-					if ("GESTIONAR ARTICULOS2".equals(privilegio.getNombrePrivilegio())) {
+					if ("GESTIONAR ARTICULOS".equals(privilegio.getNombrePrivilegio())) {
 
-						vistaModulos.getBtnGestionArticulos().enable();
+						vistaModulos.getBtnGestionArticulos().setEnabled(true);
 					}
-					if ("GESTIONAR VENTAS Y ALQUILER2".equals(privilegio.getNombrePrivilegio())) {
+					if ("GESTIONAR VENTAS Y ALQUILER".equals(privilegio.getNombrePrivilegio())) {
 
-						vistaModulos.getBtnVentaAlquiler().enable();
+						vistaModulos.getBtnVentaAlquiler().setEnabled(true);
 					}
 
 				}

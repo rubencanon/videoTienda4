@@ -52,8 +52,6 @@ public class ControladorCompras implements ActionListener {
 
 		if ("VINCULAR".equals(e.getActionCommand())) {
 
-			System.out.println("Vincular");
-
 			VinculacionCliente vistaVinculacion = new VinculacionCliente(); // ejemplifico vista vinculacion y le paso
 																			// por parametro el padre
 			Cliente modeloCliente = new Cliente();
@@ -63,15 +61,19 @@ public class ControladorCompras implements ActionListener {
 			vistaVinculacion.setControlador(controlador);
 
 			controlador.iniciarVista();
-			Cliente cliente = controlador.getCliente();
+			
+			modeloCliente = controlador.getModeloCliente();
 
-			modeloPedido.setCliente(cliente);
+			if (modeloCliente != null) {
+				modeloPedido.setCliente(modeloCliente);
 
-			vistaCompras.getTxtDocumentoId().setText(cliente.getDocumentoId());
-			vistaCompras.getTxtNombres().setText(cliente.getNombres());
-			vistaCompras.getTxtApellidos().setText(cliente.getApellidos());
+				vistaCompras.getTxtDocumentoId().setText(modeloCliente.getDocumentoId());
+				vistaCompras.getTxtNombres().setText(modeloCliente.getNombres());
+				vistaCompras.getTxtApellidos().setText(modeloCliente.getApellidos());
 
-			vistaCompras.getBtnAgregarArticulo().setEnabled(true);
+				vistaCompras.getBtnAgregarArticulo().setEnabled(true);	
+			}
+
 
 		} else if ("AGREGAR_ARTICULO".equals(e.getActionCommand())) {
 
@@ -86,22 +88,26 @@ public class ControladorCompras implements ActionListener {
 			vistaArticuloCompras.setControlador(controlador);
 
 			controlador.iniciarVista();
+			modeloArticulo = controlador.getModeloArticulo();
+			if (modeloArticulo != null) {
+				Articulo articulo = controlador.getModeloArticulo();
 
-			Articulo articulo = controlador.getModeloArticulo();
+				Transaccion transaccion = new Transaccion();
+				transaccion.setArticulo(articulo);
+				transaccion.setFechaTransaccion(new Date());
+				transaccion.setTipoTransaccion(articulo.getTipoTransaccion());
+				transaccion.setValor(articulo.getPrecio());
 
-			Transaccion transaccion = new Transaccion();
-			transaccion.setArticulo(articulo);
-			transaccion.setFechaTransaccion(new Date());
-			transaccion.setTipoTransaccion(articulo.getTipoTransaccion());
-			transaccion.setValor(articulo.getPrecio());
+				modeloPedido.getTransacciones().add(transaccion);
 
-			modeloPedido.getTransacciones().add(transaccion);
+				vistaCompras.getTxtPagoTotal().setText(modeloPedido.calcularTotal().toString().toString());
 
-			vistaCompras.getTxtPagoTotal().setText(modeloPedido.calcularTotal().toString().toString());
+				vistaCompras.agregarFila(articulo);
 
-			vistaCompras.agregarFila(articulo);
-			
-			vistaCompras.getBtnPagar().setEnabled(true);
+				vistaCompras.getBtnPagar().setEnabled(true);
+
+			}
+
 		} else if ("PAGAR".equals(e.getActionCommand())) {
 			// vistaCompras.mostrarMensaje(modeloPedido.calcularTotal().toString());
 
@@ -114,6 +120,9 @@ public class ControladorCompras implements ActionListener {
 			modeloPedido.setFechaPedido(new Date());
 
 			modeloPedido.insertarPedido();
+
+		} else if ("CANCELAR".equals(e.getActionCommand())) {
+			vistaCompras.dispose();
 
 		}
 

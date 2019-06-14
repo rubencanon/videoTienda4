@@ -20,7 +20,7 @@ public class ControladorArticuloCompra implements ActionListener {
 	}
 
 	public void iniciarVista() {
-		vistaArticulo.setTitle("Video Tienda");
+		vistaArticulo.setTitle("Agregar Artículo");
 
 		vistaArticulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		vistaArticulo.setLocationRelativeTo(null);
@@ -57,7 +57,7 @@ public class ControladorArticuloCompra implements ActionListener {
 				vistaArticulo.getTxtReferencia().setText(modeloArticulo.getReferencia());
 				vistaArticulo.getTxtTitulo().setText(modeloArticulo.getTitulo());
 				vistaArticulo.getTxtAutor().setText(modeloArticulo.getAutor());
-				// vistaArticulo.getTxtCategoria().setText(articulo.getCategorias().get);
+				vistaArticulo.getTxtCategoria().setText(modeloArticulo.getCategorias().get(0).getNombreCategoria());
 				vistaArticulo.getTxtEstado().setText(modeloArticulo.getEstado().getDescripcion());
 				vistaArticulo.getTxtFormato().setText(modeloArticulo.getFormato().getNombreFormato());
 				vistaArticulo.getTxtPrecio().setText(modeloArticulo.getPrecio().toString());

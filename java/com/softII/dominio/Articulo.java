@@ -32,7 +32,7 @@ public class Articulo implements Serializable {
 	@JoinTable(name = "articulo_categoria", foreignKey = @ForeignKey(name = "FK_ARTICULO_CATEGORIA"), joinColumns = {
 			@JoinColumn(name = "referencia", foreignKey = @ForeignKey(name = "FK_ARTICULO_CATEGORIA")) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_categoria", foreignKey = @ForeignKey(name = "FK_CATEGORIA_ARTICULO")) })
-	private Set<Categoria> categorias;
+	private List<Categoria> categorias;
 
 	private String titulo;
 	private String autor;
@@ -91,11 +91,13 @@ public class Articulo implements Serializable {
 		this.formato = formato;
 	}
 
-	public Set<Categoria> getCategorias() {
+
+
+	public List<Categoria> getCategorias() {
 		return categorias;
 	}
 
-	public void setCategorias(Set<Categoria> categorias) {
+	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
 

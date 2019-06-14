@@ -235,7 +235,7 @@ public class ArticulosCompra extends JDialog {
 		contentPanel.add(btnAgregar);
 
 		btnCancelar = new JButton("Cancelar");
-		btnAgregar.setActionCommand("CANCELAR");
+		btnCancelar.setActionCommand("CANCELAR");
 
 		btnCancelar.setBounds(224, 281, 89, 23);
 		contentPanel.add(btnCancelar);
@@ -247,5 +247,5 @@ public class ArticulosCompra extends JDialog {
 		btnCancelar.addActionListener(controlador);
 
 	}
-	
+
 }

@@ -61,6 +61,7 @@ public class Modulos extends JDialog {
 		contentPane.setLayout(null);
 
 		btnGestinClientes = new JButton("Gestión de Clientes");
+		btnGestinClientes.setEnabled(false);
 		btnGestinClientes.setActionCommand("CLIENTES");
 		btnGestinClientes.disable();
 
@@ -68,6 +69,7 @@ public class Modulos extends JDialog {
 		contentPane.add(btnGestinClientes);
 
 		btnGestionArticulos = new JButton("Gestión de Artículos");
+		btnGestionArticulos.setEnabled(false);
 		btnGestionArticulos.setActionCommand("ARTICULOS");
 		btnGestionArticulos.disable();
 
@@ -75,6 +77,7 @@ public class Modulos extends JDialog {
 		contentPane.add(btnGestionArticulos);
 
 		btnVentaAlquiler = new JButton("Compra y Alquiler");
+		btnVentaAlquiler.setEnabled(false);
 		btnVentaAlquiler.setActionCommand("COMPRAS");
 		btnVentaAlquiler.disable();
 
