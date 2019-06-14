@@ -63,13 +63,15 @@ public class ControladorArticuloCompra implements ActionListener {
 				vistaArticulo.getTxtPrecio().setText(modeloArticulo.getPrecio().toString());
 
 				vistaArticulo.getTxtTipotransaccion().setText(modeloArticulo.getTipoTransaccion().getDescripcion());
+				vistaArticulo.getBtnAgregar().setEnabled(true);
 			} else {
 				vistaArticulo.mostrarMensaje("No existe un articulo con esta referencia");
 			}
 
-			System.out.println(modeloArticulo.getAutor());
-
 		} else if ("AGREGAR".equals(e.getActionCommand())) {
+
+			vistaArticulo.dispose();
+		} else if ("CANCELAR".equals(e.getActionCommand())) {
 
 			vistaArticulo.dispose();
 		}

@@ -4,6 +4,7 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ControladorCompras implements ActionListener {
 
 	public void iniciarVista() {
 		vistaCompras.setTitle("Compras y Alquiler");
-		vistaCompras.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		vistaCompras.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		vistaCompras.setLocationRelativeTo(null);
 		vistaCompras.setVisible(true);
 
@@ -70,6 +71,8 @@ public class ControladorCompras implements ActionListener {
 			vistaCompras.getTxtNombres().setText(cliente.getNombres());
 			vistaCompras.getTxtApellidos().setText(cliente.getApellidos());
 
+			vistaCompras.getBtnAgregarArticulo().setEnabled(true);
+
 		} else if ("AGREGAR_ARTICULO".equals(e.getActionCommand())) {
 
 			System.out.println("BUSCAR_ARTICULO");
@@ -97,10 +100,13 @@ public class ControladorCompras implements ActionListener {
 			vistaCompras.getTxtPagoTotal().setText(modeloPedido.calcularTotal().toString().toString());
 
 			vistaCompras.agregarFila(articulo);
+			
+			vistaCompras.getBtnPagar().setEnabled(true);
 		} else if ("PAGAR".equals(e.getActionCommand())) {
-			vistaCompras.mostrarMensaje(modeloPedido.calcularTotal().toString());
+			// vistaCompras.mostrarMensaje(modeloPedido.calcularTotal().toString());
 
 			Pago pago = new Pago();
+
 			pago.setTipoPago("EFECTIVO");
 			pago.setValor(modeloPedido.calcularTotal().doubleValue());
 

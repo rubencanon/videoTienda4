@@ -57,6 +57,54 @@ public class Compras extends JDialog {
 
 	
 	
+	public JButton getBtnVincularCliente() {
+		return btnVincularCliente;
+	}
+
+
+
+	public void setBtnVincularCliente(JButton btnVincularCliente) {
+		this.btnVincularCliente = btnVincularCliente;
+	}
+
+
+
+	public JButton getBtnAgregarArticulo() {
+		return btnAgregarArticulo;
+	}
+
+
+
+	public void setBtnAgregarArticulo(JButton btnAgregarArticulo) {
+		this.btnAgregarArticulo = btnAgregarArticulo;
+	}
+
+
+
+	public JButton getBtnPagar() {
+		return btnPagar;
+	}
+
+
+
+	public void setBtnPagar(JButton btnPagar) {
+		this.btnPagar = btnPagar;
+	}
+
+
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+
+
+	public void setBtnCancelar(JButton btnCancelar) {
+		this.btnCancelar = btnCancelar;
+	}
+
+
+
 	public JTextField getTxtPagoTotal() {
 		return txtPagoTotal;
 	}
@@ -123,45 +171,46 @@ public class Compras extends JDialog {
 		contentPane.setLayout(null);
 
 		JLabel lblNroDeIdentificacin = new JLabel("Nro de Identificación");
-		lblNroDeIdentificacin.setBounds(10, 11, 114, 14);
+		lblNroDeIdentificacin.setBounds(10, 11, 134, 14);
 		contentPane.add(lblNroDeIdentificacin);
 
 		txtDocumentoId = new JTextField();
 		txtDocumentoId.setEditable(false);
-		txtDocumentoId.setBounds(144, 8, 141, 20);
+		txtDocumentoId.setBounds(175, 11, 141, 20);
 		contentPane.add(txtDocumentoId);
 		txtDocumentoId.setColumns(10);
 
 		txtNombres = new JTextField();
 		txtNombres.setEditable(false);
-		txtNombres.setBounds(144, 39, 141, 20);
+		txtNombres.setBounds(175, 42, 141, 20);
 		contentPane.add(txtNombres);
 		txtNombres.setColumns(10);
 
 		JLabel lblNombres = new JLabel("Nombres");
-		lblNombres.setBounds(10, 42, 46, 14);
+		lblNombres.setBounds(10, 42, 134, 14);
 		contentPane.add(lblNombres);
 
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(10, 73, 46, 14);
+		lblApellidos.setBounds(10, 73, 100, 14);
 		contentPane.add(lblApellidos);
 
 		txtApellidos = new JTextField();
 		txtApellidos.setEditable(false);
-		txtApellidos.setBounds(144, 70, 141, 20);
+		txtApellidos.setBounds(175, 73, 141, 20);
 		contentPane.add(txtApellidos);
 		txtApellidos.setColumns(10);
 
 		btnVincularCliente = new JButton("Vincular Cliente");
 		btnVincularCliente.setActionCommand("VINCULAR");
 
-		btnVincularCliente.setBounds(304, 7, 153, 23);
+		btnVincularCliente.setBounds(343, 7, 169, 23);
 		contentPane.add(btnVincularCliente);
 
 		btnAgregarArticulo = new JButton("Agregar Artículo");
+		btnAgregarArticulo.setEnabled(false);
 		btnAgregarArticulo.setActionCommand("AGREGAR_ARTICULO");
 
-		btnAgregarArticulo.setBounds(10, 131, 134, 23);
+		btnAgregarArticulo.setBounds(10, 131, 182, 23);
 		contentPane.add(btnAgregarArticulo);
 
 		JSeparator separator = new JSeparator();
@@ -211,6 +260,7 @@ public class Compras extends JDialog {
 		txtPagoTotal.setColumns(10);
 
 		btnPagar = new JButton("Pagar");
+		btnPagar.setEnabled(false);
 		btnPagar.setActionCommand("PAGAR");
 
 		btnPagar.setBounds(10, 421, 89, 23);

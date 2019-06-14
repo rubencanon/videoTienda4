@@ -201,14 +201,14 @@ public class VinculacionCliente extends JDialog {
 		super((java.awt.Frame) null, true);
 		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		
-		setBounds(100, 100, 502, 381);
+		setBounds(100, 100, 561, 381);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
 		JLabel lblNroCedula = new JLabel("Documento de Identidad");
-		lblNroCedula.setBounds(58, 10, 133, 17);
+		lblNroCedula.setBounds(22, 10, 166, 17);
 		contentPanel.add(lblNroCedula);
 
 		JLabel lblNombres = new JLabel("Nombres");
@@ -228,6 +228,7 @@ public class VinculacionCliente extends JDialog {
 		contentPanel.add(lbEmail);
 
 		txtDocumentoid = new JTextField();
+		txtDocumentoid.setText("11425007");
 		txtDocumentoid.setBounds(198, 8, 143, 20);
 		contentPanel.add(txtDocumentoid);
 		txtDocumentoid.setColumns(10);
@@ -268,7 +269,7 @@ public class VinculacionCliente extends JDialog {
 
 		btnBuscar = new JButton("Buscar Cliente");
 
-		btnBuscar.setBounds(366, 7, 110, 23);
+		btnBuscar.setBounds(366, 7, 143, 23);
 		btnBuscar.setActionCommand("BUSCAR");
 
 		contentPanel.add(btnBuscar);
@@ -280,6 +281,7 @@ public class VinculacionCliente extends JDialog {
 		contentPanel.add(btnCancelar);
 
 		btnVincular = new JButton("Vincular");
+		btnVincular.setEnabled(false);
 		btnVincular.setBounds(94, 308, 89, 23);
 		btnVincular.setActionCommand("VINCULAR");
 

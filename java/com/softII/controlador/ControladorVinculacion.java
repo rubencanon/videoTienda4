@@ -63,6 +63,8 @@ public class ControladorVinculacion implements ActionListener {
 				vistaVinculacion.getTxtEmail().setText(modeloCliente.getEmail());
 				vistaVinculacion.getTxtDireccion().setText(modeloCliente.getDireccion());
 				vistaVinculacion.getTxtAfiliacion().setText(modeloCliente.getAfiliacion().getNombreAfiliacion());
+				
+				vistaVinculacion.getBtnVincular().setEnabled(true);;
 
 			} else {
 				vistaVinculacion.mostrarMensaje("El cliente ingresado no esta registrado en el sistema");
