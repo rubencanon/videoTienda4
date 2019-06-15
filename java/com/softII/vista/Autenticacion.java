@@ -67,7 +67,7 @@ public class Autenticacion extends JFrame {
 		contentPane.add(lblClave);
 
 		txtUsuario = new JTextField();
-		txtUsuario.setText("81754741");
+		txtUsuario.setText("81754742");
 		txtUsuario.setBounds(153, 65, 124, 20);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);

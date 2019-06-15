@@ -38,6 +38,8 @@ public class ControladorModulos implements ActionListener {
 
 		if ("ARTICULOS".equals(e.getActionCommand())) {
 			System.out.println("ARTICULOS");
+			
+			////// REVISAR JULIAN
 
 			Articulo modeloArticulo = new Articulo();
 			GestionarArticulos vistaGestArticulos = new GestionarArticulos();
@@ -61,7 +63,8 @@ public class ControladorModulos implements ActionListener {
 
 		} else if ("CLIENTES".equals(e.getActionCommand())) {
 			System.out.println("CLIENTES");
-			
+			////// REVISAR JULIAN
+
 			Cliente modeloCliente = new Cliente();
 			
 			GestionarClientes vistaGestCliente = new GestionarClientes();
@@ -70,7 +73,8 @@ public class ControladorModulos implements ActionListener {
 			
 			
 			vistaGestCliente.setControlador(controlador);
-			
+			modulos.hide();
+
 			controlador.iniciarVista();
 			
 			
