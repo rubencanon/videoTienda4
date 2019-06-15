@@ -22,8 +22,8 @@ public class ControladorCliente implements ActionListener {
 	Cliente modeloCliente;
 	GestionarClientes vistaCliente;
 
-	public ControladorCliente(Cliente modelo, GestionarClientes vista) {
-		this.modeloCliente = modelo;
+	public ControladorCliente( GestionarClientes vista) {
+		this.modeloCliente = new Cliente();
 		this.vistaCliente = vista;
 	}
 

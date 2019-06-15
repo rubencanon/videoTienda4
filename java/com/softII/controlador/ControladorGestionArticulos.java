@@ -26,10 +26,10 @@ public class ControladorGestionArticulos implements ActionListener {
 	private GestionarArticulos vistaArticulo;
 	private Articulo modeloArticulo;
 
-	public ControladorGestionArticulos(GestionarArticulos vistaArticulo, Articulo modeloArticulo) {
+	public ControladorGestionArticulos(GestionarArticulos vistaArticulo) {
 		super();
 		this.vistaArticulo = vistaArticulo;
-		this.modeloArticulo = modeloArticulo;
+		this.modeloArticulo = new Articulo();
 	}
 
 	public void iniciarVista() {

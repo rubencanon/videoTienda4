@@ -13,9 +13,9 @@ public class ControladorArticuloCompra implements ActionListener {
 	private Articulo modeloArticulo;
 	private ArticulosCompra vistaArticulo;
 
-	public ControladorArticuloCompra(Articulo modeloArticulo, ArticulosCompra vistaArticulo) {
+	public ControladorArticuloCompra(ArticulosCompra vistaArticulo) {
 		super();
-		this.modeloArticulo = modeloArticulo;
+		this.modeloArticulo = new Articulo();
 		this.vistaArticulo = vistaArticulo;
 	}
 

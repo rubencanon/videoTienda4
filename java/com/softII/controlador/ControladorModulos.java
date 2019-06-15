@@ -41,9 +41,8 @@ public class ControladorModulos implements ActionListener {
 			
 			////// REVISAR JULIAN
 
-			Articulo modeloArticulo = new Articulo();
 			GestionarArticulos vistaGestArticulos = new GestionarArticulos();
-			ControladorGestionArticulos controlador = new ControladorGestionArticulos(vistaGestArticulos, modeloArticulo);
+			ControladorGestionArticulos controlador = new ControladorGestionArticulos(vistaGestArticulos);
 
 			vistaGestArticulos.setControlador(controlador);
 			modulos.hide();
@@ -56,7 +55,7 @@ public class ControladorModulos implements ActionListener {
 
 			Pedido modeloPedido = new Pedido();
 			modeloPedido.setEmpleado(usuario);
-			ControladorCompras controlador = new ControladorCompras(vistaCompras, modeloPedido);
+			ControladorCompras controlador = new ControladorCompras(vistaCompras);
 			vistaCompras.setControlador(controlador);
 			modulos.hide();
 			controlador.iniciarVista();
@@ -65,15 +64,11 @@ public class ControladorModulos implements ActionListener {
 			System.out.println("CLIENTES");
 			////// REVISAR JULIAN
 
-			Cliente modeloCliente = new Cliente();
-			
 			GestionarClientes vistaGestCliente = new GestionarClientes();
-			
-			ControladorCliente controlador = new ControladorCliente(modeloCliente, vistaGestCliente);
-			
-			
+
+			ControladorCliente controlador = new ControladorCliente(vistaGestCliente);
+
 			vistaGestCliente.setControlador(controlador);
-			modulos.hide();
 
 			controlador.iniciarVista();
 			

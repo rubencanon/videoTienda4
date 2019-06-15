@@ -12,32 +12,14 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
-		
-
-		Usuario usuario = new Usuario();
-
 		Autenticacion autenticacion = new Autenticacion();
 
-		ControladorAutenticacion controlador = new ControladorAutenticacion(usuario, autenticacion);
+		ControladorAutenticacion controlador = new ControladorAutenticacion(autenticacion);
 
 		autenticacion.setControlador(controlador);
 
 		controlador.iniciarVista();
-		
-		
-		
-		/*
-		Pedido modeloPedido = new Pedido();
 
-		Compras vistaCompras = new Compras();
-
-		ControladorCompras controlador = new ControladorCompras(vistaCompras, modeloPedido);
-
-		vistaCompras.setControlador(controlador);
-
-		controlador.iniciarVista();	
-		*/
 	}
 
 }

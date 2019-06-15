@@ -19,8 +19,8 @@ public class ControladorAutenticacion implements ActionListener {
 	Usuario modeloUsuario;
 	Autenticacion vistaAutenticacion;
 
-	public ControladorAutenticacion(Usuario usuario, Autenticacion autenticacion) {
-		this.modeloUsuario = usuario;
+	public ControladorAutenticacion( Autenticacion autenticacion) {
+		this.modeloUsuario = new Usuario();
 		this.vistaAutenticacion = autenticacion;
 
 	}

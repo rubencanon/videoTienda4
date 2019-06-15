@@ -33,10 +33,10 @@ public class ControladorCompras implements ActionListener {
 	private Compras vistaCompras;
 	private Pedido modeloPedido;
 
-	public ControladorCompras(Compras compras, Pedido pedido) {
+	public ControladorCompras(Compras compras) {
 		super();
 		this.vistaCompras = compras;
-		this.modeloPedido = pedido;
+		this.modeloPedido = new Pedido();
 	}
 
 	public void iniciarVista() {
@@ -79,16 +79,14 @@ public class ControladorCompras implements ActionListener {
 
 			System.out.println("BUSCAR_ARTICULO");
 
-			Articulo modeloArticulo = new Articulo();
-
 			ArticulosCompra vistaArticuloCompras = new ArticulosCompra();
 
-			ControladorArticuloCompra controlador = new ControladorArticuloCompra(modeloArticulo, vistaArticuloCompras);
+			ControladorArticuloCompra controlador = new ControladorArticuloCompra(vistaArticuloCompras);
 
 			vistaArticuloCompras.setControlador(controlador);
 
 			controlador.iniciarVista();
-			modeloArticulo = controlador.getModeloArticulo();
+			Articulo  modeloArticulo = controlador.getModeloArticulo();
 			if (modeloArticulo != null) {
 				Articulo articulo = controlador.getModeloArticulo();
 
