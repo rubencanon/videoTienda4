@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -138,5 +139,39 @@ public class Articulo implements Serializable {
 
 		return articulo;
 	}
+	public boolean registrarArticulo() {
 
+		EntityManager em = JPAUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			em.persist(this);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		} finally {
+			em.close();
+		}		
+	}
+	
+	public boolean actualizarArticulo() {
+
+		EntityManager em = JPAUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			em.merge(this);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		} finally {
+			em.close();
+		}		
+	}
 }

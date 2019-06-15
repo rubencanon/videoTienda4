@@ -4,7 +4,6 @@ import com.softII.controlador.ControladorAutenticacion;
 import com.softII.dominio.Cliente;
 import com.softII.dominio.Pedido;
 import com.softII.dominio.Usuario;
-import com.softII.vista.GestionClientes;
 import com.softII.vista.Autenticacion;
 import com.softII.vista.Compras;
 

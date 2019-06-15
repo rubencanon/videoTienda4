@@ -82,13 +82,30 @@ public class Cliente extends Persona implements Serializable {
 			em.persist(this);
 
 			tx.commit();
+			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e);
+			return false;
 		} finally {
 			em.close();
-
+		}		
 		}
-		return false;
+	public boolean actualizarCliente() {
+
+		EntityManager em = JPAUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			em.merge(this);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		} finally {
+			em.close();
+		}		
 	}
 
 }

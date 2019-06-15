@@ -37,7 +37,7 @@ public List<EstadoValidez> listarEstados() {
 
 	EntityManager em = JPAUtil.getEntityManager();
 
-	TypedQuery<EstadoValidez> result = em.createQuery("SELECT c FROM EstadoUsuario c", EstadoValidez.class);
+	TypedQuery<EstadoValidez> result = em.createQuery("SELECT c FROM EstadoValidez c", EstadoValidez.class);
 
 	List<EstadoValidez> resultList = result.getResultList();
 

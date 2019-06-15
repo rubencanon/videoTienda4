@@ -7,10 +7,12 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import com.softII.dominio.Articulo;
+import com.softII.dominio.Cliente;
 import com.softII.dominio.Pedido;
 import com.softII.dominio.Usuario;
 import com.softII.vista.Compras;
-import com.softII.vista.GestionArticulos;
+import com.softII.vista.GestionarArticulos;
+import com.softII.vista.GestionarClientes;
 import com.softII.vista.Modulos;
 
 public class ControladorModulos implements ActionListener {
@@ -38,9 +40,8 @@ public class ControladorModulos implements ActionListener {
 			System.out.println("ARTICULOS");
 
 			Articulo modeloArticulo = new Articulo();
-			GestionArticulos vistaGestArticulos = new GestionArticulos();
-			ControladorGestionArticulos controlador = new ControladorGestionArticulos(vistaGestArticulos,
-					modeloArticulo);
+			GestionarArticulos vistaGestArticulos = new GestionarArticulos();
+			ControladorGestionArticulos controlador = new ControladorGestionArticulos(vistaGestArticulos, modeloArticulo);
 
 			vistaGestArticulos.setControlador(controlador);
 			modulos.hide();
@@ -60,6 +61,19 @@ public class ControladorModulos implements ActionListener {
 
 		} else if ("CLIENTES".equals(e.getActionCommand())) {
 			System.out.println("CLIENTES");
+			
+			Cliente modeloCliente = new Cliente();
+			
+			GestionarClientes vistaGestCliente = new GestionarClientes();
+			
+			ControladorCliente controlador = new ControladorCliente(modeloCliente, vistaGestCliente);
+			
+			
+			vistaGestCliente.setControlador(controlador);
+			
+			controlador.iniciarVista();
+			
+			
 
 		} else if ("SALIR".equals(e.getActionCommand())) {
 			System.out.println("SALIR");

@@ -14,69 +14,244 @@ import com.softII.Util.Item;
 import com.softII.dominio.Afiliacion;
 import com.softII.dominio.Cliente;
 import com.softII.dominio.EstadoValidez;
-import com.softII.vista.GestionClientes;
+import com.softII.dominio.Persona;
+import com.softII.vista.GestionarClientes;
 
 public class ControladorCliente implements ActionListener {
-	Cliente modeloCliente;
-	GestionClientes vistaCliente;
 
-	public ControladorCliente(Cliente modelo, GestionClientes vista) {
+	Cliente modeloCliente;
+	GestionarClientes vistaCliente;
+
+	public ControladorCliente(Cliente modelo, GestionarClientes vista) {
 		this.modeloCliente = modelo;
 		this.vistaCliente = vista;
 	}
 
 	public void iniciarVista() {
-		vistaCliente.setTitle("Gestión de Clientes");
+		vistaCliente.iniciarVista();
+		vistaCliente.setVisible(true);
 		llenarAfiliaciones();
 		llenarEstados();
-		vistaCliente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		vistaCliente.setLocationRelativeTo(null);
-		vistaCliente.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Controlador ejecutado");
+		String comando = e.getActionCommand();
 
-		modeloCliente.setApellidos(vistaCliente.getTxtApellidos());
-		modeloCliente.setNombres(vistaCliente.getTxtNombres());
-		modeloCliente.setDocumentoId(vistaCliente.getTxtCedula());
-		modeloCliente.setEmail(vistaCliente.getTxtEmail());
-		modeloCliente.setTelefono(vistaCliente.getTxtTelefono());
-		modeloCliente.setDireccion(vistaCliente.getTxtDireccion());
-		modeloCliente.getAfiliacion().setIdAfiliacion(1);
+		Cliente cliente;
 
-		boolean resultado = modeloCliente.registrarCliente();
+		if ("Buscar".contentEquals(comando)) {
+
+			System.out.println("Buscar Cliente");
+			inactivarJText();
+			modeloCliente.setDocumentoId(vistaCliente.getCedulaText().getText());
+
+			cliente = modeloCliente.buscarCliente();
+
+			if (cliente != null) {
+				cargarDatos(cliente);
+				vistaCliente.getEditar().setEnabled(true);
+			} else {
+				vistaCliente.mostrarMensajeDialogo("No existe un Cliente con esta identificación");
+			}
+
+		} else if ("Agregar".contentEquals(comando)) {
+
+			System.out.println("Insertar Cliente");
+			limpiarJText();
+			activarJText();
+			vistaCliente.getGuardar().setActionCommand("Guardar");
+			vistaCliente.getGuardar().setEnabled(true);
+
+		} else if ("Editar".contentEquals(comando)) {
+
+			System.out.println("Editar Cliente");
+			activarJText();
+			vistaCliente.getGuardar().setActionCommand("EditarReal");
+			vistaCliente.getEditar().setEnabled(false);
+
+		} else if ("EditarReal".contentEquals(comando)) {
+
+			System.out.println("Editar Cliente Real");
+			if (vistaCliente.mostrarMensajeConfirmacion("Realmente desea modificar el Cliente?",
+					"Confirmar Operacion") == 0) {
+				if (validarItems() == true) {
+
+					EstadoValidez estadoValidez = new EstadoValidez();
+					estadoValidez.setIdEstadoUsuario(vistaCliente.getEstadoBox().getSelectedIndex() + 1);
+
+					Afiliacion afiliacion = new Afiliacion();
+					afiliacion.setIdAfiliacion(vistaCliente.getAfiliacionBox().getSelectedIndex() + 1);
+
+					cliente = new Cliente();
+					cliente.setAfiliacion(afiliacion);
+					cliente.setEstado(estadoValidez);
+					cliente.setApellidos(vistaCliente.getApellidosText().getText());
+					cliente.setDireccion(vistaCliente.getDireccionText().getText());
+					cliente.setDocumentoId(vistaCliente.getCedulaText().getText());
+					cliente.setEmail(vistaCliente.getEmailText().getText());
+					cliente.setNombres(vistaCliente.getNombresText().getText());
+					cliente.setTelefono(vistaCliente.getTelefonoText().getText());
+
+					cliente.setAfiliacion(afiliacion);
+					cliente.setEstado(estadoValidez);
+
+					if (cliente.actualizarCliente() == true) {
+
+						vistaCliente.mostrarMensajeDialogo("El cliente ha sido modificado con exito");
+						inactivarJText();
+						vistaCliente.getAgregar().setEnabled(true);
+						vistaCliente.getEditar().setEnabled(true);
+						vistaCliente.getBuscar().setEnabled(true);
+					} else {
+
+						vistaCliente.mostrarMensajeDialogo("No se logró modificar el cliente");
+					}
+				} else {
+					vistaCliente.mostrarMensajeDialogo("Ingrese todos los datos del Cliente");
+				}
+			}
+		} else if ("Guardar".contentEquals(comando)) {
+
+			System.out.println("Guardar Cliente");
+			if (vistaCliente.mostrarMensajeConfirmacion("Realmente desea crear el Cliente?",
+					"Confirmar Operacion") == 0) {
+				if (validarItems() == true) {
+
+					EstadoValidez estadoValidez = new EstadoValidez();
+					estadoValidez.setIdEstadoUsuario(vistaCliente.getEstadoBox().getSelectedIndex() + 1);
+
+					Afiliacion afiliacion = new Afiliacion();
+					afiliacion.setIdAfiliacion(vistaCliente.getAfiliacionBox().getSelectedIndex() + 1);
+
+					cliente = new Cliente();
+					cliente.setAfiliacion(afiliacion);
+					cliente.setEstado(estadoValidez);
+					cliente.setApellidos(vistaCliente.getApellidosText().getText());
+					cliente.setDireccion(vistaCliente.getDireccionText().getText());
+					cliente.setDocumentoId(vistaCliente.getCedulaText().getText());
+					cliente.setEmail(vistaCliente.getEmailText().getText());
+					cliente.setNombres(vistaCliente.getNombresText().getText());
+					cliente.setTelefono(vistaCliente.getTelefonoText().getText());
+
+					cliente.setAfiliacion(afiliacion);
+					cliente.setEstado(estadoValidez);
+
+					if (cliente.registrarCliente() == true) {
+
+						vistaCliente.mostrarMensajeDialogo("El cliente ha sido guarda con exito");
+						inactivarJText();
+						vistaCliente.getAgregar().setEnabled(true);
+						vistaCliente.getEditar().setEnabled(true);
+						vistaCliente.getBuscar().setEnabled(true);
+					} else {
+
+						vistaCliente.mostrarMensajeDialogo("No se logró guardar el cliente");
+					}
+				} else {
+					vistaCliente.mostrarMensajeDialogo("Ingrese todos los datos del Cliente");
+				}
+			}
+
+		} else if ("Cancelar".contentEquals(comando)) {
+
+			System.out.println("Cancelar");
+			if (vistaCliente.mostrarMensajeConfirmacion("Realmente desea cancelar la operacion?",
+					"Cancelar Operacion") == 0) {
+				vistaCliente.setVisible(false);
+			}
+
+		}
 
 	}
 
+	public void cargarDatos(Cliente cliente) {
+
+		vistaCliente.getNombresText().setText(cliente.getNombres());
+		vistaCliente.getApellidosText().setText(cliente.getApellidos());
+		vistaCliente.getCedulaText().setText(cliente.getDocumentoId());
+		vistaCliente.getEmailText().setText(cliente.getEmail());
+		vistaCliente.getTelefonoText().setText(cliente.getTelefono());
+		vistaCliente.getDireccionText().setText(cliente.getDireccion());
+	}
+
+	public void activarJText() {
+
+		vistaCliente.getCedulaText().setEnabled(true);
+		vistaCliente.getNombresText().setEnabled(true);
+		vistaCliente.getApellidosText().setEnabled(true);
+		vistaCliente.getEmailText().setEnabled(true);
+		vistaCliente.getDireccionText().setEnabled(true);
+		vistaCliente.getTelefonoText().setEnabled(true);
+		vistaCliente.getEstadoBox().setEnabled(true);
+		vistaCliente.getAfiliacionBox().setEnabled(true);
+		vistaCliente.getGuardar().setEnabled(true);
+	}
+
+	public void limpiarJText() {
+
+		vistaCliente.getCedulaText().setText("");
+		vistaCliente.getNombresText().setText("");
+		vistaCliente.getApellidosText().setText("");
+		vistaCliente.getEmailText().setText("");
+		vistaCliente.getDireccionText().setText("");
+		vistaCliente.getTelefonoText().setText("");
+	}
+
+	public void inactivarJText() {
+
+		vistaCliente.getCedulaText().setEnabled(false);
+		vistaCliente.getNombresText().setEnabled(false);
+		vistaCliente.getApellidosText().setEnabled(false);
+		vistaCliente.getEmailText().setEnabled(false);
+		vistaCliente.getDireccionText().setEnabled(false);
+		vistaCliente.getTelefonoText().setEnabled(false);
+		vistaCliente.getEstadoBox().setEnabled(false);
+		vistaCliente.getAfiliacionBox().setEnabled(false);
+		vistaCliente.getGuardar().setEnabled(false);
+	}
+
+	public boolean validarItems() {
+
+		if (vistaCliente.getNombresText().getText().equals("") || vistaCliente.getApellidosText().getText().equals("")
+				|| vistaCliente.getEmailText().getText().equals("")
+				|| vistaCliente.getDireccionText().getText().equals("")
+				|| vistaCliente.getTelefonoText().getText().equals("")
+				|| vistaCliente.getCedulaText().getText().equals("")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public void llenarAfiliaciones() {
+
 		Afiliacion afiliacion = new Afiliacion();
+		List<Afiliacion> afiliaciones = afiliacion.listarAfiliaciones();
 
 		Vector model = new Vector();
-
-		List<Afiliacion> afiliaciones = afiliacion.listarAfiliaciones();
 
 		for (Afiliacion afiliacionN : afiliaciones) {
 			model.addElement(new Item(afiliacionN.getIdAfiliacion(), afiliacionN.getNombreAfiliacion()));
 		}
 
-		vistaCliente.getCbAfiliacion().setModel(new DefaultComboBoxModel(model));
+		vistaCliente.getAfiliacionBox().setModel(new DefaultComboBoxModel(model));
 
 	}
+
 	public void llenarEstados() {
+
 		EstadoValidez estadoValidez = new EstadoValidez();
+		List<EstadoValidez> estados = estadoValidez.listarEstados();
 
 		Vector model = new Vector();
-
-		List<EstadoValidez> estados = estadoValidez.listarEstados();
 
 		for (EstadoValidez estado : estados) {
 			model.addElement(new Item(estado.getIdEstadoUsuario(), estado.getDescripcion()));
 		}
 
-		vistaCliente.getCbEstado().setModel(new DefaultComboBoxModel(model));
+		vistaCliente.getEstadoBox().setModel(new DefaultComboBoxModel(model));
 
 	}
 }
