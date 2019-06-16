@@ -39,6 +39,22 @@ public class ControladorCompras implements ActionListener {
 		this.modeloPedido = new Pedido();
 	}
 
+	public Compras getVistaCompras() {
+		return vistaCompras;
+	}
+
+	public void setVistaCompras(Compras vistaCompras) {
+		this.vistaCompras = vistaCompras;
+	}
+
+	public Pedido getModeloPedido() {
+		return modeloPedido;
+	}
+
+	public void setModeloPedido(Pedido modeloPedido) {
+		this.modeloPedido = modeloPedido;
+	}
+
 	public void iniciarVista() {
 		vistaCompras.setTitle("Compras y Alquiler");
 		vistaCompras.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -76,8 +92,6 @@ public class ControladorCompras implements ActionListener {
 
 
 		} else if ("AGREGAR_ARTICULO".equals(e.getActionCommand())) {
-
-			System.out.println("BUSCAR_ARTICULO");
 
 			ArticulosCompra vistaArticuloCompras = new ArticulosCompra();
 
