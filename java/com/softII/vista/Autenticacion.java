@@ -13,23 +13,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Autenticacion extends JFrame {
+public class Autenticacion extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JTextField txtClave;
 	JButton btnAutenticarse;
 
-	
 	public void mostrarMensaje(String mensaje) {
 		this.setVisible(true);
 		JOptionPane.showMessageDialog(this, mensaje);
 
 	}
-	
+
 	public JTextField getTxtUsuario() {
 		return txtUsuario;
 	}
@@ -51,7 +52,8 @@ public class Autenticacion extends JFrame {
 	 */
 
 	public Autenticacion() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		super((java.awt.Frame) null, true);
+		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,7 +86,7 @@ public class Autenticacion extends JFrame {
 		btnAutenticarse.setBounds(142, 170, 157, 23);
 		contentPane.add(btnAutenticarse);
 	}
-	
+
 	public void setControlador(ControladorAutenticacion controlador) {
 		btnAutenticarse.addActionListener(controlador);
 

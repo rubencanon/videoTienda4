@@ -47,6 +47,8 @@ public class ControladorModulos implements ActionListener {
 			vistaGestArticulos.setControlador(controlador);
 			modulos.hide();
 			controlador.iniciarVista();
+			modulos.show();
+
 
 		} else if ("COMPRAS".equals(e.getActionCommand())) {
 			System.out.println("COMPRAS");
@@ -60,6 +62,8 @@ public class ControladorModulos implements ActionListener {
 			vistaCompras.setControlador(controlador);
 			modulos.hide();
 			controlador.iniciarVista();
+			modulos.show();
+
 
 		} else if ("CLIENTES".equals(e.getActionCommand())) {
 			System.out.println("CLIENTES");
@@ -77,6 +81,7 @@ public class ControladorModulos implements ActionListener {
 			System.out.println("SALIR");
 			// modulos.setVisible(false);
 			modulos.dispose();
+
 		}
 
 	}

@@ -163,7 +163,9 @@ public class Compras extends JDialog {
 	}
 
 	public Compras() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		super((java.awt.Frame) null, true);
+		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 582, 541);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

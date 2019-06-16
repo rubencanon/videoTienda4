@@ -19,7 +19,7 @@ public class ControladorAutenticacion implements ActionListener {
 	Usuario modeloUsuario;
 	Autenticacion vistaAutenticacion;
 
-	public ControladorAutenticacion( Autenticacion autenticacion) {
+	public ControladorAutenticacion(Autenticacion autenticacion) {
 		this.modeloUsuario = new Usuario();
 		this.vistaAutenticacion = autenticacion;
 
@@ -76,19 +76,12 @@ public class ControladorAutenticacion implements ActionListener {
 				}
 				vistaAutenticacion.hide();
 				comtroladorModulos.iniciarVista();
-
+				vistaAutenticacion.show();
 			} else {
 				vistaAutenticacion.mostrarMensaje("Credenciales Invalidas");
 			}
 		} else {
 			vistaAutenticacion.mostrarMensaje("Credenciales Invalidas");
-
-		}
-
-		if (e.getActionCommand().equals("autenticarse")) {
-			// TODO Auto-generated method stub
-
-			System.exit(0);
 
 		}
 
