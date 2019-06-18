@@ -68,17 +68,15 @@ public class ControladorCompras implements ActionListener {
 
 		if ("VINCULAR".equals(e.getActionCommand())) {
 
-			VinculacionCliente vistaVinculacion = new VinculacionCliente(); // ejemplifico vista vinculacion y le paso
-																			// por parametro el padre
-			Cliente modeloCliente = new Cliente();
+			VinculacionCliente vistaVinculacion = new VinculacionCliente();
 
-			ControladorVinculacion controlador = new ControladorVinculacion(vistaVinculacion, modeloCliente);
+			ControladorVinculacion controlador = new ControladorVinculacion(vistaVinculacion);
 
 			vistaVinculacion.setControlador(controlador);
 
 			controlador.iniciarVista();
-			
-			modeloCliente = controlador.getModeloCliente();
+
+			Cliente modeloCliente = controlador.getModeloCliente();
 
 			if (modeloCliente != null) {
 				modeloPedido.setCliente(modeloCliente);
@@ -87,9 +85,8 @@ public class ControladorCompras implements ActionListener {
 				vistaCompras.getTxtNombres().setText(modeloCliente.getNombres());
 				vistaCompras.getTxtApellidos().setText(modeloCliente.getApellidos());
 
-				vistaCompras.getBtnAgregarArticulo().setEnabled(true);	
+				vistaCompras.getBtnAgregarArticulo().setEnabled(true);
 			}
-
 
 		} else if ("AGREGAR_ARTICULO".equals(e.getActionCommand())) {
 
@@ -100,21 +97,22 @@ public class ControladorCompras implements ActionListener {
 			vistaArticuloCompras.setControlador(controlador);
 
 			controlador.iniciarVista();
-			Articulo  modeloArticulo = controlador.getModeloArticulo();
+			
+			Articulo modeloArticulo = controlador.getModeloArticulo();
 			if (modeloArticulo != null) {
-				Articulo articulo = controlador.getModeloArticulo();
+				
 
 				Transaccion transaccion = new Transaccion();
-				transaccion.setArticulo(articulo);
+				transaccion.setArticulo(modeloArticulo);
 				transaccion.setFechaTransaccion(new Date());
-				transaccion.setTipoTransaccion(articulo.getTipoTransaccion());
-				transaccion.setValor(articulo.getPrecio());
+				transaccion.setTipoTransaccion(modeloArticulo.getTipoTransaccion());
+				transaccion.setValor(modeloArticulo.getPrecio());
 
 				modeloPedido.getTransacciones().add(transaccion);
 
-				vistaCompras.getTxtPagoTotal().setText(modeloPedido.calcularTotal().toString().toString());
+				vistaCompras.getTxtPagoTotal().setText(modeloPedido.calcularTotal().toString());
 
-				vistaCompras.agregarFila(articulo);
+				vistaCompras.agregarFila(modeloArticulo);
 
 				vistaCompras.getBtnPagar().setEnabled(true);
 
@@ -123,15 +121,30 @@ public class ControladorCompras implements ActionListener {
 		} else if ("PAGAR".equals(e.getActionCommand())) {
 			// vistaCompras.mostrarMensaje(modeloPedido.calcularTotal().toString());
 
-			Pago pago = new Pago();
+			String mensaje = "Desea proceder con el pago de :" + modeloPedido.calcularTotal().doubleValue() + "Pesos";
 
-			pago.setTipoPago("EFECTIVO");
-			pago.setValor(modeloPedido.calcularTotal().doubleValue());
+			int resultado = vistaCompras.mostrarMensajeConfirmacion(mensaje, "Confirmar Pago");
 
-			modeloPedido.setPago(pago);
-			modeloPedido.setFechaPedido(new Date());
+			if (resultado == 0) {
+				Pago pago = new Pago();
 
-			modeloPedido.insertarPedido();
+				pago.setTipoPago("EFECTIVO");
+				pago.setValor(modeloPedido.calcularTotal());
+
+				modeloPedido.setPago(pago);
+				modeloPedido.setFechaPedido(new Date());
+				boolean transaccionOK = modeloPedido.insertarPedido();
+				if (transaccionOK) {
+					vistaCompras.mostrarMensaje("El pago fue registrado correctamente");
+
+				} else {
+					vistaCompras.mostrarMensaje("Se ´rodujo un error al registrar el pago");
+
+				}
+
+				vistaCompras.dispose();
+
+			}
 
 		} else if ("CANCELAR".equals(e.getActionCommand())) {
 			vistaCompras.dispose();

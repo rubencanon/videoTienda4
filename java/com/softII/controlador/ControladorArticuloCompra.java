@@ -51,7 +51,7 @@ public class ControladorArticuloCompra implements ActionListener {
 		if ("BUSCAR".equals(e.getActionCommand())) {
 
 			modeloArticulo.setReferencia(vistaArticulo.getTxtReferencia().getText());
-			modeloArticulo = modeloArticulo.buscarArticulo();
+			modeloArticulo = modeloArticulo.buscar();
 
 			if (modeloArticulo != null) {
 				vistaArticulo.getTxtReferencia().setText(modeloArticulo.getReferencia());

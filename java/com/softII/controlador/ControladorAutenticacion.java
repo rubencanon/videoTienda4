@@ -13,6 +13,7 @@ import com.softII.dominio.Privilegio;
 import com.softII.dominio.Usuario;
 import com.softII.vista.Autenticacion;
 import com.softII.vista.Modulos;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 public class ControladorAutenticacion implements ActionListener {
 
@@ -34,57 +35,62 @@ public class ControladorAutenticacion implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Controlador ejecutado");
-		System.out.println(e.getActionCommand());
 
-		String idUsuario = vistaAutenticacion.getTxtUsuario().getText();
-		String clave = vistaAutenticacion.getTxtClave().getText();
+		if ("AUTENTICAR".equals(e.getActionCommand())) {
 
-		System.out.println(idUsuario);
+			String idUsuario = vistaAutenticacion.getTxtUsuario().getText();
+			String clave = vistaAutenticacion.getTxtClave().getText();
 
-		modeloUsuario = new Usuario();
-		modeloUsuario.setDocumentoId(idUsuario);
-		modeloUsuario = modeloUsuario.buscarUsuario();
+			modeloUsuario.setDocumentoId(idUsuario);
+			modeloUsuario = modeloUsuario.buscarUsuario();
 
-		if (modeloUsuario != null) {
-			boolean autenticado = modeloUsuario.autenticarUsuario(idUsuario, clave);
+			if (modeloUsuario != null) {
+				boolean autenticado = modeloUsuario.autenticarUsuario(idUsuario, clave);
 
-			if (autenticado == true) {
+				if (autenticado == true) {
 
-				List<Privilegio> privilegios = modeloUsuario.getRol().getPrivilegios();
+					Modulos vistaModulos = new Modulos();
+					ControladorModulos controladorModulos = new ControladorModulos(vistaModulos, modeloUsuario);
+					vistaModulos.setControlador(controladorModulos);
 
-				// autenticacion.setVisible(false);
-				Modulos vistaModulos = new Modulos();
-				ControladorModulos comtroladorModulos = new ControladorModulos(vistaModulos, modeloUsuario);
-				vistaModulos.setControlador(comtroladorModulos);
+					List<Privilegio> privilegios = modeloUsuario.getRol().getPrivilegios();
 
-				for (Privilegio privilegio : privilegios) {
-					if ("GESTIONAR CLIENTES".equals(privilegio.getNombrePrivilegio())) {
+					for (Privilegio privilegio : privilegios) {
+						if ("GESTIONAR CLIENTES".equals(privilegio.getNombrePrivilegio())) {
 
-						vistaModulos.getBtnGestinClientes().setEnabled(true);
+							vistaModulos.getBtnGestinClientes().setEnabled(true);
+						}
+
+						if ("GESTIONAR ARTICULOS".equals(privilegio.getNombrePrivilegio())) {
+
+							vistaModulos.getBtnGestionArticulos().setEnabled(true);
+						}
+						if ("GESTIONAR VENTAS Y ALQUILER".equals(privilegio.getNombrePrivilegio())) {
+
+							vistaModulos.getBtnVentaAlquiler().setEnabled(true);
+						}
+
 					}
-
-					if ("GESTIONAR ARTICULOS".equals(privilegio.getNombrePrivilegio())) {
-
-						vistaModulos.getBtnGestionArticulos().setEnabled(true);
-					}
-					if ("GESTIONAR VENTAS Y ALQUILER".equals(privilegio.getNombrePrivilegio())) {
-
-						vistaModulos.getBtnVentaAlquiler().setEnabled(true);
-					}
-
+					vistaAutenticacion.hide();
+					controladorModulos.iniciarVista();
+					vistaAutenticacion.show();
+				} else {
+					vistaAutenticacion.mostrarMensaje("Credenciales Invalidas");
 				}
-				vistaAutenticacion.hide();
-				comtroladorModulos.iniciarVista();
-				vistaAutenticacion.show();
 			} else {
 				vistaAutenticacion.mostrarMensaje("Credenciales Invalidas");
+
 			}
-		} else {
-			vistaAutenticacion.mostrarMensaje("Credenciales Invalidas");
-
+		}else if ("SALIR".equals(e.getActionCommand())) {
+			
+			int respuesta = vistaAutenticacion.mostrarMensajeConfirmacion("Confirme que dese salir de la aplicación", "Confirmación de salida");
+			
+			if (respuesta == 0) {
+				vistaAutenticacion.dispose();
+	
+			}
+			
 		}
-
 		// panelPrincipal.setMensaje(mensaje);
 	}
 

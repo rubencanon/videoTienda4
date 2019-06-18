@@ -110,9 +110,9 @@ public class Pedido implements Serializable {
 		this.fechaPedido = fechaPedido;
 	}
 
-	public Long calcularTotal() {
+	public Double calcularTotal() {
 
-		Long total = new Long(0);
+		Double total = new Double(0);
 		for (Transaccion transaccion : transacciones) {
 			total += transaccion.getValor();
 		}

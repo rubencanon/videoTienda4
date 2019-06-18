@@ -54,7 +54,7 @@ public class ControladorGestionArticulos implements ActionListener {
 			inactivarJText();
 			modeloArticulo.setReferencia(vistaArticulo.getReferenciaText().getText());
 
-			articulo = modeloArticulo.buscarArticulo();
+			articulo = modeloArticulo.buscar();
 
 			if (articulo != null) {
 				cargarDatos(articulo);

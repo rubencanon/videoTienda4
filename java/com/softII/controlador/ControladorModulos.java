@@ -37,7 +37,6 @@ public class ControladorModulos implements ActionListener {
 		// TODO Auto-generated method stub
 
 		if ("ARTICULOS".equals(e.getActionCommand())) {
-			System.out.println("ARTICULOS");
 
 			////// REVISAR JULIAN
 
@@ -51,7 +50,6 @@ public class ControladorModulos implements ActionListener {
 
 
 		} else if ("COMPRAS".equals(e.getActionCommand())) {
-			System.out.println("COMPRAS");
 
 			Compras vistaCompras = new Compras();
 

@@ -36,7 +36,6 @@ public class ControladorCliente implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("Controlador ejecutado");
 		String comando = e.getActionCommand();
 
 		Cliente cliente;

@@ -119,9 +119,10 @@ public class Articulo implements Serializable {
 	}
 
 ///////////////////////////////////////////////////////////////////////
-	public Articulo buscarArticulo() {
+	public Articulo buscar() {
 		EntityManager em = JPAUtil.getEntityManager();
 
+		
 		Articulo articulo = null;
 
 		try {

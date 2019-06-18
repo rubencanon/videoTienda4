@@ -14,10 +14,10 @@ public class ControladorVinculacion implements ActionListener {
 	VinculacionCliente vistaVinculacion;
 	Cliente modeloCliente;
 
-	public ControladorVinculacion(VinculacionCliente vistaVinculacion, Cliente modeloCliente) {
+	public ControladorVinculacion(VinculacionCliente vistaVinculacion) {
 		super();
 		this.vistaVinculacion = vistaVinculacion;
-		this.modeloCliente = modeloCliente;
+		this.modeloCliente = new Cliente();
 	}
 
 	
@@ -58,7 +58,7 @@ public class ControladorVinculacion implements ActionListener {
 	}
 
 	public void iniciarVista() {
-		vistaVinculacion.setTitle("Video Tienda");
+		vistaVinculacion.setTitle("Vinculación de Cliente");
 		vistaVinculacion.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		vistaVinculacion.setLocationRelativeTo(null);
 		vistaVinculacion.setVisible(true);
@@ -76,7 +76,6 @@ public class ControladorVinculacion implements ActionListener {
 			modeloCliente.setDocumentoId(vistaVinculacion.getTxtDocumentoid().getText());
 
 			modeloCliente = modeloCliente.buscarCliente();
-			System.out.println("....");
 			if (modeloCliente != null) {
 				vistaVinculacion.getTxtNombres().setText(modeloCliente.getNombres());
 				vistaVinculacion.getTxtApellidos().setText(modeloCliente.getApellidos());
@@ -85,7 +84,7 @@ public class ControladorVinculacion implements ActionListener {
 				vistaVinculacion.getTxtDireccion().setText(modeloCliente.getDireccion());
 				vistaVinculacion.getTxtAfiliacion().setText(modeloCliente.getAfiliacion().getNombreAfiliacion());
 				
-				vistaVinculacion.getBtnVincular().setEnabled(true);;
+				vistaVinculacion.getBtnVincular().setEnabled(true);
 
 			} else {
 				vistaVinculacion.mostrarMensaje("El cliente ingresado no esta registrado en el sistema");

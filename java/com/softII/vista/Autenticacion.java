@@ -23,14 +23,17 @@ public class Autenticacion extends JDialog {
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JTextField txtClave;
-	JButton btnAutenticarse;
+	private JButton btnAutenticarse;
+	private JButton btnSalir;
 
 	public void mostrarMensaje(String mensaje) {
 		this.setVisible(true);
 		JOptionPane.showMessageDialog(this, mensaje);
 
 	}
-
+    public int mostrarMensajeConfirmacion(String mensaje, String titulo) {
+		return JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.OK_CANCEL_OPTION);
+	} 
 	public JTextField getTxtUsuario() {
 		return txtUsuario;
 	}
@@ -81,14 +84,23 @@ public class Autenticacion extends JDialog {
 		txtClave.setColumns(10);
 
 		btnAutenticarse = new JButton("Autenticarse");
+		btnAutenticarse.setActionCommand("AUTENTICAR");
+
 		btnAutenticarse.disable();
 
-		btnAutenticarse.setBounds(142, 170, 157, 23);
+		btnAutenticarse.setBounds(34, 171, 157, 23);
 		contentPane.add(btnAutenticarse);
+
+		btnSalir = new JButton("Salir");
+		btnSalir.setActionCommand("SALIR");
+
+		btnSalir.setBounds(233, 171, 130, 23);
+		contentPane.add(btnSalir);
 	}
 
 	public void setControlador(ControladorAutenticacion controlador) {
 		btnAutenticarse.addActionListener(controlador);
-
+		btnSalir.addActionListener(controlador);
+		
 	}
 }

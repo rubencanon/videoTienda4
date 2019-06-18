@@ -55,7 +55,9 @@ public class Compras extends JDialog {
 
 	}
 
-	
+    public int mostrarMensajeConfirmacion(String mensaje, String titulo) {
+		return JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.OK_CANCEL_OPTION);
+	} 
 	
 	public JButton getBtnVincularCliente() {
 		return btnVincularCliente;
