@@ -15,27 +15,32 @@ import com.softII.dominio.Afiliacion;
 import com.softII.dominio.Cliente;
 import com.softII.dominio.EstadoValidez;
 import com.softII.dominio.Persona;
-import com.softII.vista.GestionarClientes;
+import com.softII.vista.GestionClientes;
+import com.softII.vista.Modulos;
 
 public class ControladorCliente implements ActionListener {
 
 	Cliente modeloCliente;
-	GestionarClientes vistaCliente;
+	GestionClientes vistaCliente;
 
-	public ControladorCliente( GestionarClientes vista) {
+	public ControladorCliente(GestionClientes vistaClientes) {
 		this.modeloCliente = new Cliente();
-		this.vistaCliente = vista;
+		this.vistaCliente = vistaClientes;
 	}
 
 	public void iniciarVista() {
-		vistaCliente.iniciarVista();
-		vistaCliente.setVisible(true);
+
 		llenarAfiliaciones();
 		llenarEstados();
+		
+		vistaCliente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		vistaCliente.setLocationRelativeTo(null);
+		vistaCliente.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("Controlador ejecutado");
 		String comando = e.getActionCommand();
 
 		Cliente cliente;
@@ -43,16 +48,18 @@ public class ControladorCliente implements ActionListener {
 		if ("Buscar".contentEquals(comando)) {
 
 			System.out.println("Buscar Cliente");
-			inactivarJText();
+
 			modeloCliente.setDocumentoId(vistaCliente.getCedulaText().getText());
 
 			cliente = modeloCliente.buscarCliente();
 
 			if (cliente != null) {
+				inactivarJText();
 				cargarDatos(cliente);
 				vistaCliente.getEditar().setEnabled(true);
 			} else {
 				vistaCliente.mostrarMensajeDialogo("No existe un Cliente con esta identificación");
+				limpiarJText();
 			}
 
 		} else if ("Agregar".contentEquals(comando)) {
@@ -137,6 +144,8 @@ public class ControladorCliente implements ActionListener {
 					cliente.setAfiliacion(afiliacion);
 					cliente.setEstado(estadoValidez);
 
+					System.out.println("[" + cliente.getNombres() + " " + cliente.getApellidos() + "]");
+
 					if (cliente.registrarCliente() == true) {
 
 						vistaCliente.mostrarMensajeDialogo("El cliente ha sido guarda con exito");
@@ -200,7 +209,7 @@ public class ControladorCliente implements ActionListener {
 
 	public void inactivarJText() {
 
-		vistaCliente.getCedulaText().setEnabled(false);
+		vistaCliente.getCedulaText().setEnabled(true);
 		vistaCliente.getNombresText().setEnabled(false);
 		vistaCliente.getApellidosText().setEnabled(false);
 		vistaCliente.getEmailText().setEnabled(false);

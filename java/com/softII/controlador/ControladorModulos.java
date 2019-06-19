@@ -11,8 +11,8 @@ import com.softII.dominio.Cliente;
 import com.softII.dominio.Pedido;
 import com.softII.dominio.Usuario;
 import com.softII.vista.Compras;
-import com.softII.vista.GestionarArticulos;
-import com.softII.vista.GestionarClientes;
+import com.softII.vista.GestionArticulos;
+import com.softII.vista.GestionClientes;
 import com.softII.vista.Modulos;
 
 public class ControladorModulos implements ActionListener {
@@ -40,14 +40,13 @@ public class ControladorModulos implements ActionListener {
 
 			////// REVISAR JULIAN
 
-			GestionarArticulos vistaGestArticulos = new GestionarArticulos();
+			GestionArticulos vistaGestArticulos = new GestionArticulos();
 			ControladorGestionArticulos controlador = new ControladorGestionArticulos(vistaGestArticulos);
 
 			vistaGestArticulos.setControlador(controlador);
 			modulos.hide();
 			controlador.iniciarVista();
 			modulos.show();
-
 
 		} else if ("COMPRAS".equals(e.getActionCommand())) {
 
@@ -62,18 +61,18 @@ public class ControladorModulos implements ActionListener {
 			controlador.iniciarVista();
 			modulos.show();
 
-
 		} else if ("CLIENTES".equals(e.getActionCommand())) {
 			System.out.println("CLIENTES");
 			////// REVISAR JULIAN
 
-			GestionarClientes vistaGestCliente = new GestionarClientes();
+			GestionClientes vistaGestCliente = new GestionClientes();
 
 			ControladorCliente controlador = new ControladorCliente(vistaGestCliente);
 
 			vistaGestCliente.setControlador(controlador);
-
+			modulos.hide();
 			controlador.iniciarVista();
+			modulos.show();
 
 		} else if ("SALIR".equals(e.getActionCommand())) {
 			System.out.println("SALIR");

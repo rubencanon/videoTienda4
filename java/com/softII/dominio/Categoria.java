@@ -51,5 +51,27 @@ public class Categoria implements Serializable {
 		return resultList;
 
 	}
+	
+	public Categoria buscarCategoria() {
+		EntityManager em = JPAUtil.getEntityManager();
 
+		Categoria categoria = null;
+
+		try {
+			String query = "SELECT e FROM Categoria e where e.idCategoria = :idCategoria";
+			TypedQuery<Categoria> result = em.createQuery(query, Categoria.class);
+			result.setParameter("idCategoria", this.getIdCategoria());
+			List<Categoria> resultList = result.getResultList();
+
+			if (!resultList.isEmpty()) {
+				categoria = resultList.get(0);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			em.close();
+		}
+
+		return categoria;
+	}
 }

@@ -66,12 +66,17 @@ public class Cliente extends Persona implements Serializable {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
+			em.close();
 		}
 
 		return cliente;
 	}
 
 	public boolean registrarCliente() {
+		
+		System.out.println(this.getDocumentoId());
+		
 
 		EntityManager em = JPAUtil.getEntityManager();
 
@@ -89,7 +94,8 @@ public class Cliente extends Persona implements Serializable {
 		} finally {
 			em.close();
 		}		
-		}
+	}
+	
 	public boolean actualizarCliente() {
 
 		EntityManager em = JPAUtil.getEntityManager();
