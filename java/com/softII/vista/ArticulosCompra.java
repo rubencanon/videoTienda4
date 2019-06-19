@@ -135,6 +135,7 @@ public class ArticulosCompra extends JDialog {
 	public ArticulosCompra() {
 
 		super((java.awt.Frame) null, true);
+		setTitle("Agregar Artículo a Lista");
 		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 450, 432);
 		getContentPane().setLayout(new BorderLayout());

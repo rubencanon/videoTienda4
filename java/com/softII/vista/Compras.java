@@ -167,6 +167,7 @@ public class Compras extends JDialog {
 	public Compras() {
 		
 		super((java.awt.Frame) null, true);
+		setTitle("Gestión de Compras");
 		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 582, 541);
 		contentPane = new JPanel();

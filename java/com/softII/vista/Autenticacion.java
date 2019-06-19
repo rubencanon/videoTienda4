@@ -56,6 +56,7 @@ public class Autenticacion extends JDialog {
 
 	public Autenticacion() {
 		super((java.awt.Frame) null, true);
+		setTitle("Autenticación");
 		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
