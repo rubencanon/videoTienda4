@@ -40,7 +40,7 @@ public class EstadoArticulo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public List<EstadoArticulo> listarEstadosArticulo() {
+	public List<EstadoArticulo> obtenerEstadosArticulo() {
 
 		EntityManager em = JPAUtil.getEntityManager();
 

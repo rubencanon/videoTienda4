@@ -40,7 +40,7 @@ public class TipoTransaccion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public List<TipoTransaccion> listarTiposTransaccion() {
+	public List<TipoTransaccion> obtenerTiposTransaccion() {
 
 		EntityManager em = JPAUtil.getEntityManager();
 

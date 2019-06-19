@@ -188,7 +188,7 @@ public class ControladorGestionArticulos implements ActionListener {
         	
             Categoria categoria = new Categoria();            
             categoria.setIdCategoria(vistaArticulo.getCategoriaox().getSelectedIndex() + 1);
-            categoria = categoria.buscarCategoria();
+            categoria = categoria.buscar();
 
             try {
             	vistaArticulo.getListCategoria().add(categoria);
@@ -296,7 +296,7 @@ public class ControladorGestionArticulos implements ActionListener {
     private void llenarEstados() {
 
         EstadoValidez estadoValidez = new EstadoValidez();
-        List<EstadoValidez> estadoValidezs = estadoValidez.listarEstados();
+        List<EstadoValidez> estadoValidezs = estadoValidez.obtenerEstados();
 
         Vector model = new Vector();
 
@@ -309,7 +309,7 @@ public class ControladorGestionArticulos implements ActionListener {
     private void llenarTransacciones() {
 
         TipoTransaccion tipoTransaccion = new TipoTransaccion();
-        List<TipoTransaccion> tipoTransacciones = tipoTransaccion.listarTiposTransaccion();
+        List<TipoTransaccion> tipoTransacciones = tipoTransaccion.obtenerTiposTransaccion();
 
         Vector model = new Vector();
 
@@ -322,7 +322,7 @@ public class ControladorGestionArticulos implements ActionListener {
     private void llenarCategorias() {
 
         Categoria categoria = new Categoria();
-        List<Categoria> categorias = categoria.listarCategorias();
+        List<Categoria> categorias = categoria.obtenerCategorias();
 
         Vector model = new Vector();
 
@@ -334,7 +334,7 @@ public class ControladorGestionArticulos implements ActionListener {
 
     private void llenarFormatos() {
         Formato formato = new Formato();
-        List<Formato> formatos = formato.listarFormatos();
+        List<Formato> formatos = formato.obtenerFormatos();
 
         Vector model = new Vector();
 

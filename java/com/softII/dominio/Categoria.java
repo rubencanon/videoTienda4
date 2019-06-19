@@ -40,7 +40,7 @@ public class Categoria implements Serializable {
 		this.nombreCategoria = nombreCategoria;
 	}
 
-	public List<Categoria> listarCategorias() {
+	public List<Categoria> obtenerCategorias() {
 
 		EntityManager em = JPAUtil.getEntityManager();
 
@@ -52,7 +52,7 @@ public class Categoria implements Serializable {
 
 	}
 	
-	public Categoria buscarCategoria() {
+	public Categoria buscar() {
 		EntityManager em = JPAUtil.getEntityManager();
 
 		Categoria categoria = null;

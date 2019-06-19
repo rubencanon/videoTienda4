@@ -251,7 +251,7 @@ public class ControladorCliente implements ActionListener {
 	public void llenarEstados() {
 
 		EstadoValidez estadoValidez = new EstadoValidez();
-		List<EstadoValidez> estados = estadoValidez.listarEstados();
+		List<EstadoValidez> estados = estadoValidez.obtenerEstados();
 
 		Vector model = new Vector();
 

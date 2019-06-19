@@ -33,7 +33,7 @@ public void setDescripcion(String descripcion) {
 	this.descripcion = descripcion;
 }
 
-public List<EstadoValidez> listarEstados() {
+public List<EstadoValidez> obtenerEstados() {
 
 	EntityManager em = JPAUtil.getEntityManager();
 

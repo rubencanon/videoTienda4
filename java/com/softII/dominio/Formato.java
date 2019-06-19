@@ -57,7 +57,7 @@ public class Formato implements Serializable {
 		this.nombreFormato = nombreFormato;
 	}
 	
-	public List<Formato> listarFormatos() {
+	public List<Formato> obtenerFormatos() {
 
 		EntityManager em = JPAUtil.getEntityManager();
 
