@@ -119,7 +119,7 @@ public class Pedido implements Serializable {
 		return total;
 	}
 
-	public boolean insertarPedido() {
+	public boolean insertar() {
 
 		boolean transaccionOK = false;
 		EntityManager em = JPAUtil.getEntityManager();

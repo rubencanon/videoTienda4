@@ -133,7 +133,7 @@ public class ControladorCompras implements ActionListener {
 
 				modeloPedido.setPago(pago);
 				modeloPedido.setFechaPedido(new Date());
-				boolean transaccionOK = modeloPedido.insertarPedido();
+				boolean transaccionOK = modeloPedido.insertar();
 				if (transaccionOK) {
 					vistaCompras.mostrarMensaje("El pago fue registrado correctamente");
 

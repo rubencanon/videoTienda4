@@ -140,7 +140,7 @@ public class Articulo implements Serializable {
 
 		return articulo;
 	}
-	public boolean registrarArticulo() {
+	public boolean insertar() {
 
 		EntityManager em = JPAUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -158,7 +158,7 @@ public class Articulo implements Serializable {
 		}		
 	}
 	
-	public boolean actualizarArticulo() {
+	public boolean actualizar() {
 
 		EntityManager em = JPAUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();

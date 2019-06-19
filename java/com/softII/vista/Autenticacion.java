@@ -96,7 +96,6 @@ public class Autenticacion extends JDialog {
 		contentPane.add(btnSalir);
 		
 		pwdClave = new JPasswordField();
-		pwdClave.setText("clave");
 		pwdClave.setBounds(153, 107, 124, 20);
 		contentPane.add(pwdClave);
 	}

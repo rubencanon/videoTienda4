@@ -237,7 +237,7 @@ public class Compras extends JDialog {
 		listaArticulos.setCellSelectionEnabled(true);
 		listaArticulos.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-		Object[] columnas = { "Referencia", "Titulo", "Formato", "Transacción", "Precio", "Accion" };
+		Object[] columnas = { "Referencia", "Titulo","Formato", "Formato", "Transacción", "Precio" };
 
 		for (Object object : columnas) {
 
@@ -280,7 +280,7 @@ public class Compras extends JDialog {
 	}
 
 	public void agregarFila(Articulo articulo) {
-		Object[] filaArticulo = { articulo.getReferencia(), articulo.getTitulo(),
+		Object[] filaArticulo = { articulo.getReferencia(), articulo.getTitulo(), articulo.getAutor(),
 				articulo.getFormato().getNombreFormato(), articulo.getTipoTransaccion().getDescripcion(),
 				articulo.getPrecio() };
 

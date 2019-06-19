@@ -45,7 +45,7 @@ public class ControladorAutenticacion implements ActionListener {
 			modeloUsuario = modeloUsuario.buscarUsuario();
 
 			if (modeloUsuario != null) {
-				boolean autenticado = modeloUsuario.autenticarUsuario(idUsuario, clave);
+				boolean autenticado = modeloUsuario.autenticar(idUsuario, clave);
 
 				if (autenticado == true) {
 

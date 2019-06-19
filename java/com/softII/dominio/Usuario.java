@@ -110,7 +110,7 @@ public class Usuario extends Persona implements Serializable {
 
 	}
 
-	public boolean autenticarUsuario(String idUsuario, String clave) {
+	public boolean autenticar(String idUsuario, String clave) {
 
 		boolean valido = false;
 		if (idUsuario.equals(this.getDocumentoId()) && clave.equals(this.clave)) {

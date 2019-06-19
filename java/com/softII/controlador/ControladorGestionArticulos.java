@@ -110,7 +110,7 @@ public class ControladorGestionArticulos implements ActionListener {
                     articulo.setFormato(formato);
                     articulo.setTipoTransaccion(tipoTransaccion);
 
-                    if (articulo.actualizarArticulo() == true) {
+                    if (articulo.actualizar() == true) {
 
                         vistaArticulo.mostrarMensajeDialogo("El Articulo ha sido modificado con exito");
                         inactivarJText();
@@ -159,7 +159,7 @@ public class ControladorGestionArticulos implements ActionListener {
                     articulo.setFormato(formato);
                     articulo.setTipoTransaccion(tipoTransaccion);
 
-                    if (articulo.actualizarArticulo() == true) {
+                    if (articulo.actualizar() == true) {
 
                         vistaArticulo.mostrarMensajeDialogo("El Articulo ha sido creado con exito");
                         inactivarJText();

@@ -57,7 +57,7 @@ public class Pago implements Serializable {
 		this.valor = valor;
 	}
 
-	public boolean registrarPago() {
+	public boolean insertar() {
 
 
 

@@ -51,7 +51,7 @@ public class ControladorCliente implements ActionListener {
 
 			modeloCliente.setDocumentoId(vistaCliente.getCedulaText().getText());
 
-			cliente = modeloCliente.buscarCliente();
+			cliente = modeloCliente.buscar();
 
 			if (cliente != null) {
 				inactivarJText();
@@ -103,7 +103,7 @@ public class ControladorCliente implements ActionListener {
 					cliente.setAfiliacion(afiliacion);
 					cliente.setEstado(estadoValidez);
 
-					if (cliente.actualizarCliente() == true) {
+					if (cliente.actualizar() == true) {
 
 						vistaCliente.mostrarMensajeDialogo("El cliente ha sido modificado con exito");
 						inactivarJText();
@@ -146,7 +146,7 @@ public class ControladorCliente implements ActionListener {
 
 					System.out.println("[" + cliente.getNombres() + " " + cliente.getApellidos() + "]");
 
-					if (cliente.registrarCliente() == true) {
+					if (cliente.insertar() == true) {
 
 						vistaCliente.mostrarMensajeDialogo("El cliente ha sido guarda con exito");
 						inactivarJText();

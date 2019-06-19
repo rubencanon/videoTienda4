@@ -75,7 +75,7 @@ public class ControladorVinculacion implements ActionListener {
 
 			modeloCliente.setDocumentoId(vistaVinculacion.getTxtDocumentoid().getText());
 
-			modeloCliente = modeloCliente.buscarCliente();
+			modeloCliente = modeloCliente.buscar();
 			if (modeloCliente != null) {
 				vistaVinculacion.getTxtNombres().setText(modeloCliente.getNombres());
 				vistaVinculacion.getTxtApellidos().setText(modeloCliente.getApellidos());
