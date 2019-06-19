@@ -199,6 +199,7 @@ public class VinculacionCliente extends JDialog {
 	public VinculacionCliente() {
 		
 		super((java.awt.Frame) null, true);
+		setTitle("Vinculación de Cliente");
 		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		
 		setBounds(100, 100, 561, 381);

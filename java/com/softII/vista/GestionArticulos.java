@@ -125,7 +125,7 @@ public class GestionArticulos extends JDialog {
 		editar = new javax.swing.JButton();
 		editar.setBounds(27, 61, 113, 23);
 
-		setTitle("Agregar Artículo");
+		setTitle("Gestión de Artículos");
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 

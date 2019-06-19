@@ -39,7 +39,7 @@ public class ControladorAutenticacion implements ActionListener {
 		if ("AUTENTICAR".equals(e.getActionCommand())) {
 
 			String idUsuario = vistaAutenticacion.getTxtUsuario().getText();
-			String clave = vistaAutenticacion.getTxtClave().getText();
+			String clave = vistaAutenticacion.getPwdClave().getText();
 
 			modeloUsuario.setDocumentoId(idUsuario);
 			modeloUsuario = modeloUsuario.buscarUsuario();

@@ -84,7 +84,7 @@ public class GestionClientes extends JDialog {
 		agregar = new javax.swing.JButton();
 		editar = new javax.swing.JButton();
 
-		setTitle("Buscar Cliente(s)");
+		setTitle("Gestión de Clientes");
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 		jPanel1.setMaximumSize(new java.awt.Dimension(480, 250));

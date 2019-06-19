@@ -53,6 +53,7 @@ public class Modulos extends JDialog {
 	 */
 	public Modulos() {
 		super((java.awt.Frame) null, true);
+		setTitle("Tienda de Video el Buen Lector");
 		setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

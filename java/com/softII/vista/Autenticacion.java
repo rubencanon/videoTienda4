@@ -17,14 +17,15 @@ import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Autenticacion extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField txtUsuario;
-	private JTextField txtClave;
 	private JButton btnAutenticarse;
 	private JButton btnSalir;
+	private JPasswordField pwdClave;
 
 	public void mostrarMensaje(String mensaje) {
 		this.setVisible(true);
@@ -34,6 +35,15 @@ public class Autenticacion extends JDialog {
     public int mostrarMensajeConfirmacion(String mensaje, String titulo) {
 		return JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.OK_CANCEL_OPTION);
 	} 
+    
+    
+    
+	public JPasswordField getPwdClave() {
+		return pwdClave;
+	}
+	public void setPwdClave(JPasswordField pwdClave) {
+		this.pwdClave = pwdClave;
+	}
 	public JTextField getTxtUsuario() {
 		return txtUsuario;
 	}
@@ -42,13 +52,6 @@ public class Autenticacion extends JDialog {
 		this.txtUsuario = txtUsuario;
 	}
 
-	public JTextField getTxtClave() {
-		return txtClave;
-	}
-
-	public void setTxtClave(JTextField txtClave) {
-		this.txtClave = txtClave;
-	}
 
 	/**
 	 * Launch the application.
@@ -78,12 +81,6 @@ public class Autenticacion extends JDialog {
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
-		txtClave = new JTextField();
-		txtClave.setText("33288");
-		txtClave.setBounds(153, 107, 124, 20);
-		contentPane.add(txtClave);
-		txtClave.setColumns(10);
-
 		btnAutenticarse = new JButton("Autenticarse");
 		btnAutenticarse.setActionCommand("AUTENTICAR");
 
@@ -97,6 +94,11 @@ public class Autenticacion extends JDialog {
 
 		btnSalir.setBounds(233, 171, 130, 23);
 		contentPane.add(btnSalir);
+		
+		pwdClave = new JPasswordField();
+		pwdClave.setText("clave");
+		pwdClave.setBounds(153, 107, 124, 20);
+		contentPane.add(pwdClave);
 	}
 
 	public void setControlador(ControladorAutenticacion controlador) {
