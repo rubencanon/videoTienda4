@@ -55,9 +55,22 @@ public class Compras extends JDialog {
 
 	}
 
-    public int mostrarMensajeConfirmacion(String mensaje, String titulo) {
-		return JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.OK_CANCEL_OPTION);
-	} 
+	public int mostrarMensajeConfirmacion(String mensaje, String titulo) {
+    	Object[] choices = {"Efectivo", "Cancelar"};
+    	Object defaultChoice = choices[0];
+    	int respuesta = JOptionPane.showOptionDialog(this,
+    			mensaje,
+    			titulo,
+    	             JOptionPane.YES_NO_OPTION,
+    	             JOptionPane.QUESTION_MESSAGE,
+    	             null,
+    	             choices,
+    	             defaultChoice);
+    	 
+    	 
+    	return respuesta;
+	}
+	
 	
 	public JButton getBtnVincularCliente() {
 		return btnVincularCliente;

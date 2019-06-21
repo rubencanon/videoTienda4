@@ -16,6 +16,7 @@ import com.softII.dominio.Afiliacion;
 import com.softII.dominio.Articulo;
 import com.softII.dominio.Categoria;
 import com.softII.dominio.Cliente;
+import com.softII.dominio.Disponibilidad;
 import com.softII.dominio.EstadoArticulo;
 import com.softII.dominio.EstadoValidez;
 import com.softII.dominio.Formato;
@@ -25,335 +26,309 @@ import com.softII.vista.Modulos;
 
 public class ControladorGestionArticulos implements ActionListener {
 
-    private GestionArticulos vistaArticulo;
-    private Articulo modeloArticulo;
+	private GestionArticulos vistaArticulo;
+	private Articulo modeloArticulo;
 
-    public ControladorGestionArticulos(GestionArticulos vistaArticulo) {
-        super();
-        this.vistaArticulo = vistaArticulo;
-        this.modeloArticulo = new Articulo();
-    }
+	public ControladorGestionArticulos(GestionArticulos vistaArticulo) {
+		super();
+		this.vistaArticulo = vistaArticulo;
+		this.modeloArticulo = new Articulo();
+	}
 
-    public void iniciarVista() {
-        llenarFormatos();
-        llenarCategorias();
-        llenarTransacciones();
-        llenarEstados();
-        vistaArticulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        vistaArticulo.setLocationRelativeTo(null);
-        vistaArticulo.setVisible(true);
-    }
+	public void iniciarVista() {
+		llenarFormatos();
+		llenarCategorias();
+		llenarTransacciones();
+		llenarEstados();
+		vistaArticulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		vistaArticulo.setLocationRelativeTo(null);
+		vistaArticulo.setVisible(true);
+	}
 
-    public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
 
-        // TODO Auto-generated method stub
-        System.out.println("Controlador ejecutado");
-        String comando = e.getActionCommand();
+		// TODO Auto-generated method stub
+		String comando = e.getActionCommand();
 
-        Articulo articulo;
+		Articulo articulo;
 
-        if ("Buscar".contentEquals(comando)) {
+		if ("Buscar".contentEquals(comando)) {
 
-            modeloArticulo.setReferencia(vistaArticulo.getReferenciaText().getText());
+			modeloArticulo.setReferencia(vistaArticulo.getReferenciaText().getText());
 
-            System.out.println("[" + vistaArticulo.getReferenciaText().getText() + "] Referencia: " + modeloArticulo.getReferencia());
-            articulo = modeloArticulo.buscar();
+			modeloArticulo = modeloArticulo.buscar();
 
-            if (articulo != null) {
-            	inactivarJText();
-                cargarDatos(articulo);
-                vistaArticulo.getEditar().setEnabled(true);
-            } else {
-                vistaArticulo.mostrarMensajeDialogo("No existe un Articulo con esta identificación");
-            }
+			if (modeloArticulo != null) {
+				inactivarJText();
+				cargarDatos(modeloArticulo);
+				vistaArticulo.getEditar().setEnabled(true);
+			} else {
+				vistaArticulo.mostrarMensajeDialogo("No existe un Articulo con esta identificación");
+			}
 
-        } else if ("Agregar".contentEquals(comando)) {
+		} else if ("Agregar".contentEquals(comando)) {
 
-        	limpiarListas();
-            limpiarJText();
-            activarJText();
-            vistaArticulo.getGuardarBoton().setActionCommand("Guardar");
-            vistaArticulo.getGuardarBoton().setEnabled(true);
+			limpiarListas();
+			limpiarJText();
+			activarJText();
+			vistaArticulo.getGuardarBoton().setActionCommand("Guardar");
+			vistaArticulo.getGuardarBoton().setEnabled(true);
 
-        } else if ("Editar".contentEquals(comando)) {
+		} else if ("Editar".contentEquals(comando)) {
 
-            activarJText();
-            vistaArticulo.getGuardarBoton().setActionCommand("EditarReal");
-            vistaArticulo.getEditar().setEnabled(false);
-            vistaArticulo.getGuardarBoton().setEnabled(true);
+			activarJText();
+			vistaArticulo.getGuardarBoton().setActionCommand("EditarReal");
+			vistaArticulo.getEditar().setEnabled(false);
+			vistaArticulo.getGuardarBoton().setEnabled(true);
 
-        } else if ("EditarReal".contentEquals(comando)) {
+		} else if ("EditarReal".contentEquals(comando)) {
 
-            if (vistaArticulo.mostrarMensajeConfirmacion("Realmente desea modificar el Articulo?",
-                    "Confirmar Operacion") == 0) {
-                if (validarItems() == true) {
+			if (validarItems() == true) {
 
-                	List<Categoria> categorias = vistaArticulo.getListCategoria();
+				List<Categoria> categorias = vistaArticulo.getListCategoria();
 
-                    EstadoArticulo estadoArticulo = new EstadoArticulo();
-                    estadoArticulo.setIdEstado(vistaArticulo.getEstadoBox().getSelectedIndex() + 1);
+				EstadoArticulo estadoArticulo = new EstadoArticulo();
+				estadoArticulo.setIdEstado(vistaArticulo.getEstadoBox().getSelectedIndex() + 1);
 
-                    Formato formato = new Formato();
-                    String val = (vistaArticulo.getFormatoBox().getSelectedIndex() + 1) + "";
-                    formato.setIdFormato(Long.parseLong(val));
+				Formato formato = new Formato();
+				String val = (vistaArticulo.getFormatoBox().getSelectedIndex() + 1) + "";
+				formato.setIdFormato(Long.parseLong(val));
 
-                    TipoTransaccion tipoTransaccion = new TipoTransaccion();
-                    tipoTransaccion.setIdTipoTransaccion(vistaArticulo.getTransaccionBox().getSelectedIndex() + 1);
+				TipoTransaccion tipoTransaccion = new TipoTransaccion();
+				tipoTransaccion.setIdTipoTransaccion(vistaArticulo.getTransaccionBox().getSelectedIndex() + 1);
 
-                    articulo = new Articulo();
-                    articulo.setAutor(vistaArticulo.getAutorText().getText());
-                    articulo.setPrecio(Long.valueOf(vistaArticulo.getPrecioText().getText()));
-                    articulo.setReferencia(vistaArticulo.getReferenciaText().getText());
-                    articulo.setTitulo(vistaArticulo.getTituloText().getText());
-                    articulo.setCategorias(categorias);
-                    articulo.setEstado(estadoArticulo);
-                    articulo.setFormato(formato);
-                    articulo.setTipoTransaccion(tipoTransaccion);
+				modeloArticulo.setAutor(vistaArticulo.getAutorText().getText());
+				modeloArticulo.setPrecio(Long.valueOf(vistaArticulo.getPrecioText().getText()));
+				modeloArticulo.setReferencia(vistaArticulo.getReferenciaText().getText());
+				modeloArticulo.setTitulo(vistaArticulo.getTituloText().getText());
+				modeloArticulo.setCategorias(categorias);
+				modeloArticulo.setEstado(estadoArticulo);
+				modeloArticulo.setFormato(formato);
+				modeloArticulo.setTipoTransaccion(tipoTransaccion);
+				modeloArticulo.setDisponibilidad(new Disponibilidad().obtenerDisponible());
 
-                    if (articulo.actualizar() == true) {
+				if (modeloArticulo.actualizar() == true) {
 
-                        vistaArticulo.mostrarMensajeDialogo("El Articulo ha sido modificado con exito");
-                        inactivarJText();
-                        vistaArticulo.getAgregar().setEnabled(true);
-                        vistaArticulo.getEditar().setEnabled(true);
-                        vistaArticulo.getBuscar().setEnabled(true);                        
-                    } else {
+					vistaArticulo.mostrarMensajeDialogo("El Articulo ha sido modificado con exito");
+					inactivarJText();
+					vistaArticulo.getAgregar().setEnabled(true);
+					vistaArticulo.getEditar().setEnabled(true);
+					vistaArticulo.getBuscar().setEnabled(true);
+				} else {
 
-                        vistaArticulo.mostrarMensajeDialogo("No se logró modificar el Articulo");
-                    }
-                } else {
-                    vistaArticulo.mostrarMensajeDialogo("Ingrese todos los datos del Articulo");
-                }
-            }
-        } else if ("Guardar".contentEquals(comando)) {
-        	
-        	System.out.println("Entre a Guardar");
+					vistaArticulo.mostrarMensajeDialogo("No se logró modificar el Articulo");
+				}
+			} else {
+				vistaArticulo.mostrarMensajeDialogo("Ingrese todos los datos del Articulo");
+			}
 
-            if (vistaArticulo.mostrarMensajeConfirmacion("Realmente desea almacenar el Articulo?",
-                    "Confirmar Operacion") == 0) {
-                if (validarItems() == true) {
+		} else if ("Guardar".contentEquals(comando)) {
 
-                	
-                	
-                    List<Categoria> categorias = vistaArticulo.getListCategoria();
-                    
-                    System.out.println("Numero de elementos: "+categorias.size());
-                    
-                    EstadoArticulo estadoArticulo = new EstadoArticulo();
-                    estadoArticulo.setIdEstado(vistaArticulo.getEstadoBox().getSelectedIndex() + 1);
+			if (validarItems() == true) {
 
-                    Formato formato = new Formato();
-                    String val = (vistaArticulo.getFormatoBox().getSelectedIndex() + 1) + "";
-                    formato.setIdFormato(Long.parseLong(val));
+				List<Categoria> categorias = vistaArticulo.getListCategoria();
 
-                    TipoTransaccion tipoTransaccion = new TipoTransaccion();
-                    tipoTransaccion.setIdTipoTransaccion(vistaArticulo.getTransaccionBox().getSelectedIndex() + 1);
+				EstadoArticulo estadoArticulo = new EstadoArticulo();
+				estadoArticulo.setIdEstado(vistaArticulo.getEstadoBox().getSelectedIndex() + 1);
 
-                    articulo = new Articulo();
-                    articulo.setAutor(vistaArticulo.getAutorText().getText());
-                    articulo.setPrecio(Long.valueOf(vistaArticulo.getPrecioText().getText()));
-                    articulo.setReferencia(vistaArticulo.getReferenciaText().getText());
-                    articulo.setTitulo(vistaArticulo.getTituloText().getText());
-                    articulo.setCategorias(categorias);
-                    articulo.setEstado(estadoArticulo);
-                    articulo.setFormato(formato);
-                    articulo.setTipoTransaccion(tipoTransaccion);
+				Formato formato = new Formato();
+				String val = (vistaArticulo.getFormatoBox().getSelectedIndex() + 1) + "";
+				formato.setIdFormato(Long.parseLong(val));
 
-                    if (articulo.actualizar() == true) {
+				TipoTransaccion tipoTransaccion = new TipoTransaccion();
+				tipoTransaccion.setIdTipoTransaccion(vistaArticulo.getTransaccionBox().getSelectedIndex() + 1);
 
-                        vistaArticulo.mostrarMensajeDialogo("El Articulo ha sido creado con exito");
-                        inactivarJText();
-                        vistaArticulo.getAgregar().setEnabled(true);
-                        vistaArticulo.getEditar().setEnabled(true);
-                        vistaArticulo.getBuscar().setEnabled(true);                        
-                    } else {
+				modeloArticulo.setAutor(vistaArticulo.getAutorText().getText());
+				modeloArticulo.setPrecio(Long.valueOf(vistaArticulo.getPrecioText().getText()));
+				modeloArticulo.setReferencia(vistaArticulo.getReferenciaText().getText());
+				modeloArticulo.setTitulo(vistaArticulo.getTituloText().getText());
+				modeloArticulo.setCategorias(categorias);
+				modeloArticulo.setEstado(estadoArticulo);
+				modeloArticulo.setFormato(formato);
+				modeloArticulo.setTipoTransaccion(tipoTransaccion);
+				modeloArticulo.setDisponibilidad(new Disponibilidad().obtenerDisponible());
 
-                        vistaArticulo.mostrarMensajeDialogo("No se logró crear el Articulo");
-                    }
-                } else {
-                    vistaArticulo.mostrarMensajeDialogo("Ingrese todos los datos del Articulo");
-                }
-            }
+				if (modeloArticulo.actualizar() == true) {
 
-        } else if ("Cancelar".contentEquals(comando)) {
+					vistaArticulo.mostrarMensajeDialogo("El Articulo ha sido creado con exito");
+					inactivarJText();
+					vistaArticulo.getAgregar().setEnabled(true);
+					vistaArticulo.getEditar().setEnabled(true);
+					vistaArticulo.getBuscar().setEnabled(true);
+				} else {
 
-            if (vistaArticulo.mostrarMensajeConfirmacion("Realmente desea cancelar la operacion?",
-                    "Cancelar Operacion") == 0) {
-            	vistaArticulo.setVisible(false);
-            }
+					vistaArticulo.mostrarMensajeDialogo("No se logró crear el Articulo");
+				}
+			} else {
+				vistaArticulo.mostrarMensajeDialogo("Ingrese todos los datos del Articulo");
+			}
 
-        } else if ("AgregarCat".contentEquals(comando)) {
-        	
-        	System.out.println("Agregar Categoria");
-        	
-            Categoria categoria = new Categoria();            
-            categoria.setIdCategoria(vistaArticulo.getCategoriaox().getSelectedIndex() + 1);
-            categoria = categoria.buscar();
+		} else if ("Cancelar".contentEquals(comando)) {
 
-            try {
-            	vistaArticulo.getListCategoria().add(categoria);
-            	vistaArticulo.getModeloLista().addElement(categoria.getNombreCategoria());
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}          
-            
-            
-            /*Vector model = new Vector();
+			vistaArticulo.setVisible(false);
 
-            model.addElement(new Item(categoria.getIdCategoria(), categoria.getNombreCategoria()));
-            vistaArticulo.getCategoriaList().setModel(new DefaultComboBoxModel(model));*/
+		} else if ("AgregarCat".contentEquals(comando)) {
 
-        } else if ("EliminarCat".contentEquals(comando)) {
+			System.out.println("Agregar Categoria");
 
-        	int index = vistaArticulo.getCategoriaList().getSelectedIndex();
+			Categoria categoria = new Categoria();
+			categoria.setIdCategoria(vistaArticulo.getCategoriaox().getSelectedIndex() + 1);
+			categoria = categoria.buscar();
 
-        	try {
-        		vistaArticulo.getModeloLista().removeElementAt(index);
-            	vistaArticulo.getListCategoria().remove(index);
+			try {
+				vistaArticulo.getListCategoria().add(categoria);
+				vistaArticulo.getModeloLista().addElement(categoria.getNombreCategoria());
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}
-        	
-        	/*Categoria categoria1 = new Categoria();
-            categoria1.setIdCategoria(vistaArticulo.getCategoriaox().getSelectedIndex() + 1);
 
-            Vector model1 = new Vector();
+			/*
+			 * Vector model = new Vector();
+			 * 
+			 * model.addElement(new Item(categoria.getIdCategoria(),
+			 * categoria.getNombreCategoria()));
+			 * vistaArticulo.getCategoriaList().setModel(new DefaultComboBoxModel(model));
+			 */
 
-            model1.remove(new Item(categoria1.getIdCategoria(), categoria1.getNombreCategoria()));*/
-        }
+		} else if ("EliminarCat".contentEquals(comando)) {
 
-    }
+			int index = vistaArticulo.getCategoriaList().getSelectedIndex();
 
-    public void cargarDatos(Articulo articulo) {
+			try {
+				vistaArticulo.getModeloLista().removeElementAt(index);
+				vistaArticulo.getListCategoria().remove(index);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 
-        vistaArticulo.getReferenciaText().setText(articulo.getReferencia());
-        vistaArticulo.getTituloText().setText(articulo.getTitulo());
-        vistaArticulo.getAutorText().setText(articulo.getAutor());
-        vistaArticulo.getPrecioText().setText(articulo.getPrecio() + "");
-        
-        limpiarListas();
-        
-        List<Categoria> categorias= articulo.getCategorias();
-        
-        for (Categoria categoriasN : categorias) {
-        	vistaArticulo.getListCategoria().add(categoriasN);
-        	vistaArticulo.getModeloLista().addElement(categoriasN.getNombreCategoria());
-        }
-        
-    }
+		}
 
-    public void activarJText() {
-        vistaArticulo.getTituloText().setEnabled(true);
-        vistaArticulo.getAutorText().setEnabled(true);
-        vistaArticulo.getFormatoBox().setEnabled(true);
-        vistaArticulo.getCategoriaox().setEnabled(true);
-        vistaArticulo.getAgregarCat().setEnabled(true);
-        vistaArticulo.getEliminarCat().setEnabled(true);
-        vistaArticulo.getDescripcionArea().setEnabled(true);
-        vistaArticulo.getPrecioText().setEnabled(true);
-        vistaArticulo.getTransaccionBox().setEnabled(true);
-        vistaArticulo.getEstadoBox().setEnabled(true);
-        vistaArticulo.getDisponibleBox().setEnabled(true);
-        vistaArticulo.getCategoriaList().setEnabled(true);
-    }
+	}
 
-    public void inactivarJText() {
-        vistaArticulo.getTituloText().setEnabled(false);
-        vistaArticulo.getAutorText().setEnabled(false);
-        vistaArticulo.getFormatoBox().setEnabled(false);
-        vistaArticulo.getCategoriaox().setEnabled(false);
-        vistaArticulo.getAgregarCat().setEnabled(false);
-        vistaArticulo.getEliminarCat().setEnabled(false);
-        vistaArticulo.getDescripcionArea().setEnabled(false);
-        vistaArticulo.getPrecioText().setEnabled(false);
-        vistaArticulo.getTransaccionBox().setEnabled(false);
-        vistaArticulo.getEstadoBox().setEnabled(false);
-        vistaArticulo.getDisponibleBox().setEnabled(false);
-        vistaArticulo.getGuardarBoton().setEnabled(false);
-        vistaArticulo.getCategoriaList().setEnabled(false);
-    }
+	public void cargarDatos(Articulo articulo) {
 
-    public void limpiarJText() {
+		vistaArticulo.getReferenciaText().setText(articulo.getReferencia());
+		vistaArticulo.getTituloText().setText(articulo.getTitulo());
+		vistaArticulo.getAutorText().setText(articulo.getAutor());
+		vistaArticulo.getPrecioText().setText(articulo.getPrecio() + "");
 
-        vistaArticulo.getReferenciaText().setText("");
-        vistaArticulo.getTituloText().setText("");
-        vistaArticulo.getAutorText().setText("");
-        vistaArticulo.getDescripcionArea().setText("");
-        vistaArticulo.getPrecioText().setText("");
-    }
+		limpiarListas();
 
-    public boolean validarItems() {
+		List<Categoria> categorias = articulo.getCategorias();
 
-        if (vistaArticulo.getReferenciaText().getText().equals("") || vistaArticulo.getTituloText().getText().equals("")
-                || vistaArticulo.getAutorText().getText().equals("")
-                || vistaArticulo.getPrecioText().getText().equals("")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+		for (Categoria categoriasN : categorias) {
+			vistaArticulo.getListCategoria().add(categoriasN);
+			vistaArticulo.getModeloLista().addElement(categoriasN.getNombreCategoria());
+		}
 
-    private void llenarEstados() {
+	}
 
-        EstadoValidez estadoValidez = new EstadoValidez();
-        List<EstadoValidez> estadoValidezs = estadoValidez.obtenerEstados();
+	public void activarJText() {
+		vistaArticulo.getTituloText().setEnabled(true);
+		vistaArticulo.getAutorText().setEnabled(true);
+		vistaArticulo.getFormatoBox().setEnabled(true);
+		vistaArticulo.getCategoriaox().setEnabled(true);
+		vistaArticulo.getAgregarCat().setEnabled(true);
+		vistaArticulo.getEliminarCat().setEnabled(true);
+		vistaArticulo.getPrecioText().setEnabled(true);
+		vistaArticulo.getTransaccionBox().setEnabled(true);
+		vistaArticulo.getEstadoBox().setEnabled(true);
+		vistaArticulo.getDisponibleBox().setEnabled(true);
+		vistaArticulo.getCategoriaList().setEnabled(true);
+	}
 
-        Vector model = new Vector();
+	public void inactivarJText() {
+		vistaArticulo.getTituloText().setEnabled(false);
+		vistaArticulo.getAutorText().setEnabled(false);
+		vistaArticulo.getFormatoBox().setEnabled(false);
+		vistaArticulo.getCategoriaox().setEnabled(false);
+		vistaArticulo.getAgregarCat().setEnabled(false);
+		vistaArticulo.getEliminarCat().setEnabled(false);
+		vistaArticulo.getPrecioText().setEnabled(false);
+		vistaArticulo.getTransaccionBox().setEnabled(false);
+		vistaArticulo.getEstadoBox().setEnabled(false);
+		vistaArticulo.getDisponibleBox().setEnabled(false);
+		vistaArticulo.getGuardarBoton().setEnabled(false);
+		vistaArticulo.getCategoriaList().setEnabled(false);
+	}
 
-        for (EstadoValidez estadoValidezN : estadoValidezs) {
-            model.addElement(new Item(estadoValidezN.getIdEstadoUsuario(), estadoValidezN.getDescripcion()));
-        }
-        vistaArticulo.getEstadoBox().setModel(new DefaultComboBoxModel(model));
-    }
+	public void limpiarJText() {
 
-    private void llenarTransacciones() {
+		vistaArticulo.getReferenciaText().setText("");
+		vistaArticulo.getTituloText().setText("");
+		vistaArticulo.getAutorText().setText("");
 
-        TipoTransaccion tipoTransaccion = new TipoTransaccion();
-        List<TipoTransaccion> tipoTransacciones = tipoTransaccion.obtenerTiposTransaccion();
+		vistaArticulo.getPrecioText().setText("");
+	}
 
-        Vector model = new Vector();
+	public boolean validarItems() {
 
-        for (TipoTransaccion tipoTransaccionN : tipoTransacciones) {
-            model.addElement(new Item(tipoTransaccionN.getIdTipoTransaccion(), tipoTransaccionN.getDescripcion()));
-        }
-        vistaArticulo.getTransaccionBox().setModel(new DefaultComboBoxModel(model));
-    }
+		if (vistaArticulo.getReferenciaText().getText().equals("") || vistaArticulo.getTituloText().getText().equals("")
+				|| vistaArticulo.getAutorText().getText().equals("")
+				|| vistaArticulo.getPrecioText().getText().equals("")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-    private void llenarCategorias() {
+	private void llenarEstados() {
 
-        Categoria categoria = new Categoria();
-        List<Categoria> categorias = categoria.obtenerCategorias();
+		EstadoArticulo estadoArticulo = new EstadoArticulo();
+		List<EstadoArticulo> estadosArticulo = estadoArticulo.obtenerEstadosArticulo();
 
-        Vector model = new Vector();
+		Vector model = new Vector();
 
-        for (Categoria categoriaN : categorias) {
-            model.addElement(new Item(categoriaN.getIdCategoria(), categoriaN.getNombreCategoria()));
-        }
-        vistaArticulo.getCategoriaox().setModel(new DefaultComboBoxModel(model));
-    }
+		for (EstadoArticulo estadosArticuloN : estadosArticulo) {
+			model.addElement(new Item(estadosArticuloN.getIdEstado(), estadosArticuloN.getDescripcion()));
+		}
+		vistaArticulo.getEstadoBox().setModel(new DefaultComboBoxModel(model));
+	}
 
-    private void llenarFormatos() {
-        Formato formato = new Formato();
-        List<Formato> formatos = formato.obtenerFormatos();
+	private void llenarTransacciones() {
 
-        Vector model = new Vector();
+		TipoTransaccion tipoTransaccion = new TipoTransaccion();
+		List<TipoTransaccion> tipoTransacciones = tipoTransaccion.obtenerTiposTransaccion();
 
-        for (Formato formatoN : formatos) {
-            model.addElement(new Item(Math.toIntExact(formatoN.getIdFormato()), formatoN.getNombreFormato()));
-        }
-        vistaArticulo.getFormatoBox().setModel(new DefaultComboBoxModel(model));
-    }
-    
-    public void limpiarListas() {
-    	
-    	System.out.println("Antes: " + vistaArticulo.getListCategoria().size());
-    	vistaArticulo.getListCategoria().clear();
-    	System.out.println("Despues: " + vistaArticulo.getListCategoria().size());
-    	
-    	System.out.println("Antes: " + vistaArticulo.getModeloLista().getSize());
-    	vistaArticulo.getModeloLista().clear();
-    	System.out.println("Despues: " + vistaArticulo.getModeloLista().getSize());
-    	
-    }
+		Vector model = new Vector();
+
+		for (TipoTransaccion tipoTransaccionN : tipoTransacciones) {
+			model.addElement(new Item(tipoTransaccionN.getIdTipoTransaccion(), tipoTransaccionN.getDescripcion()));
+		}
+		vistaArticulo.getTransaccionBox().setModel(new DefaultComboBoxModel(model));
+	}
+
+	private void llenarCategorias() {
+
+		Categoria categoria = new Categoria();
+		List<Categoria> categorias = categoria.obtenerCategorias();
+
+		Vector model = new Vector();
+
+		for (Categoria categoriaN : categorias) {
+			model.addElement(new Item(categoriaN.getIdCategoria(), categoriaN.getNombreCategoria()));
+		}
+		vistaArticulo.getCategoriaox().setModel(new DefaultComboBoxModel(model));
+	}
+
+	private void llenarFormatos() {
+		Formato formato = new Formato();
+		List<Formato> formatos = formato.obtenerFormatos();
+
+		Vector model = new Vector();
+
+		for (Formato formatoN : formatos) {
+			model.addElement(new Item(Math.toIntExact(formatoN.getIdFormato()), formatoN.getNombreFormato()));
+		}
+		vistaArticulo.getFormatoBox().setModel(new DefaultComboBoxModel(model));
+	}
+
+	public void limpiarListas() {
+
+		vistaArticulo.getListCategoria().clear();
+
+		vistaArticulo.getModeloLista().clear();
+
+	}
 
 }

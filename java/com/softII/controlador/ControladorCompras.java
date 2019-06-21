@@ -19,6 +19,7 @@ import javax.swing.table.TableModel;
 
 import com.softII.dominio.Articulo;
 import com.softII.dominio.Cliente;
+import com.softII.dominio.Disponibilidad;
 import com.softII.dominio.Pago;
 import com.softII.dominio.Pedido;
 import com.softII.dominio.Transaccion;
@@ -101,6 +102,8 @@ public class ControladorCompras implements ActionListener {
 			Articulo modeloArticulo = controlador.getModeloArticulo();
 			if (modeloArticulo != null) {
 				
+				//modeloArticulo.setDisponibilidad(new Disponibilidad().obtenerNoDisponible());
+				modeloArticulo.getDisponibilidad().setIdDisponibilidad(2);
 
 				Transaccion transaccion = new Transaccion();
 				transaccion.setArticulo(modeloArticulo);
@@ -121,9 +124,13 @@ public class ControladorCompras implements ActionListener {
 		} else if ("PAGAR".equals(e.getActionCommand())) {
 			// vistaCompras.mostrarMensaje(modeloPedido.calcularTotal().toString());
 
-			String mensaje = "Desea proceder con el pago de :" + modeloPedido.calcularTotal().doubleValue() + "Pesos";
+			String mensaje = "El monto total del pedido es: " + modeloPedido.calcularTotal().doubleValue() + " Pesos";
 
-			int resultado = vistaCompras.mostrarMensajeConfirmacion(mensaje, "Confirmar Pago");
+			vistaCompras.mostrarMensaje(mensaje);
+
+			mensaje = "Seleccione el tipo de pago " ;
+
+			int resultado = vistaCompras.mostrarMensajeConfirmacion(mensaje, "Tipo de pago");
 
 			if (resultado == 0) {
 				Pago pago = new Pago();
@@ -138,7 +145,7 @@ public class ControladorCompras implements ActionListener {
 					vistaCompras.mostrarMensaje("El pago fue registrado correctamente");
 
 				} else {
-					vistaCompras.mostrarMensaje("Se ´rodujo un error al registrar el pago");
+					vistaCompras.mostrarMensaje("Se produjo un error al registrar el pago");
 
 				}
 

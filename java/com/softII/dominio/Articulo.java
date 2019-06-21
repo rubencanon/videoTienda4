@@ -42,6 +42,9 @@ public class Articulo implements Serializable {
 	@JoinColumn(name = "id_tipo_transaccion", foreignKey = @ForeignKey(name = "FK_TIPO_TRAN"))
 	private TipoTransaccion tipoTransaccion;
 
+	@ManyToOne
+	@JoinColumn(name = "id_disponibilidad", foreignKey = @ForeignKey(name = "FK_ART_DISP"))
+	private Disponibilidad disponibilidad;
 	private Long precio;
 
 	@ManyToOne
@@ -62,6 +65,14 @@ public class Articulo implements Serializable {
 
 	public Long getPrecio() {
 		return precio;
+	}
+
+	public Disponibilidad getDisponibilidad() {
+		return disponibilidad;
+	}
+
+	public void setDisponibilidad(Disponibilidad disponibilidad) {
+		this.disponibilidad = disponibilidad;
 	}
 
 	public EstadoArticulo getEstado() {
