@@ -46,9 +46,16 @@ public class ControladorArticuloCompra implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getActionCommand());
 
 		if ("BUSCAR".equals(e.getActionCommand())) {
+
+			if ("".equals(vistaArticulo.getTxtReferencia().getText())) {
+
+				vistaArticulo.mostrarMensaje("Ingrese los datos requeridos");
+
+				return;
+
+			}
 
 			modeloArticulo.setReferencia(vistaArticulo.getTxtReferencia().getText());
 			modeloArticulo = modeloArticulo.buscar();

@@ -37,6 +37,16 @@ public class ControladorAutenticacion implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if ("AUTENTICAR".equals(e.getActionCommand())) {
+			
+			
+			if ("".equals(vistaAutenticacion.getTxtUsuario().getText()) || "".equals(vistaAutenticacion.getPwdClave().getText())) {
+
+				vistaAutenticacion.mostrarMensaje("Ingrese los datos requeridos");
+
+				return;
+
+			}
+
 
 			String idUsuario = vistaAutenticacion.getTxtUsuario().getText();
 			String clave = vistaAutenticacion.getPwdClave().getText();

@@ -20,26 +20,21 @@ public class ControladorVinculacion implements ActionListener {
 		this.modeloCliente = new Cliente();
 	}
 
-	
 	public VinculacionCliente getVistaVinculacion() {
 		return vistaVinculacion;
 	}
-
 
 	public void setVistaVinculacion(VinculacionCliente vistaVinculacion) {
 		this.vistaVinculacion = vistaVinculacion;
 	}
 
-
 	public Cliente getModeloCliente() {
 		return modeloCliente;
 	}
 
-
 	public void setModeloCliente(Cliente modeloCliente) {
 		this.modeloCliente = modeloCliente;
 	}
-
 
 	public VinculacionCliente getVinculacion() {
 		return vistaVinculacion;
@@ -67,12 +62,16 @@ public class ControladorVinculacion implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getActionCommand());
 
 		if ("BUSCAR".equals(e.getActionCommand())) {
 
-			System.out.println(e.getActionCommand());
+			if ("".equals(vistaVinculacion.getTxtDocumentoid().getText())) {
 
+				vistaVinculacion.mostrarMensaje("Ingrese los datos requeridos");
+
+				return;
+
+			}
 			modeloCliente.setDocumentoId(vistaVinculacion.getTxtDocumentoid().getText());
 
 			modeloCliente = modeloCliente.buscar();
@@ -83,7 +82,7 @@ public class ControladorVinculacion implements ActionListener {
 				vistaVinculacion.getTxtEmail().setText(modeloCliente.getEmail());
 				vistaVinculacion.getTxtDireccion().setText(modeloCliente.getDireccion());
 				vistaVinculacion.getTxtAfiliacion().setText(modeloCliente.getAfiliacion().getNombreAfiliacion());
-				
+
 				vistaVinculacion.getBtnVincular().setEnabled(true);
 
 			} else {
